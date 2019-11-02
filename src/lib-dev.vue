@@ -1,16 +1,16 @@
 <script>
-import { KFormJsSample } from './entry';
+//import { KFormJsSample } from './entry';
 export default {
-    name:  'KFormJsLibDev', // vue library dev component
+    //name:  'KFormJsLibDev', // vue library dev component
     components: {
-        KFormJsSample,
+       // KFormJsSample,
     },
 }
 </script>
 
 <template>
     <div class="k-form-js-lib-dev">
-        <k-form-js-sample></k-form-js-sample>
+        <!--<k-form-js-sample></k-form-js-sample>-->
     </div>
 </template>
 
