@@ -932,7 +932,7 @@ var __vue_staticRenderFns__$6 = [];
     undefined,
     undefined,
     undefined
-  );/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,CheckBox: check_box,Date: date,Datetime: datetime,Field: field,Form: form,Select: select,TextArea: textarea});// Import vue components
+  );/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,CheckBox: check_box,Date: date,Datetime: datetime,Field: field,Form: form,Select: select,Textarea: textarea});// Import vue components
 
 // install function executed by Vue.use()
 function install(Vue) {
@@ -958,4 +958,4 @@ if (typeof window !== 'undefined') {
 }
 if (GlobalVue) {
   GlobalVue.use(plugin);
-}exports.CheckBox=check_box;exports.Date=date;exports.Datetime=datetime;exports.Field=field;exports.Form=form;exports.Select=select;exports.TextArea=textarea;exports.default=plugin;
+}exports.CheckBox=check_box;exports.Date=date;exports.Datetime=datetime;exports.Field=field;exports.Form=form;exports.Select=select;exports.Textarea=textarea;exports.default=plugin;
