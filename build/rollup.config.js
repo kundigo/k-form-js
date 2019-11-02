@@ -34,6 +34,7 @@ const baseConfig = {
 const external = [
   // list external dependencies, exactly the way it is written in the import statement.
   // eg. 'jquery'
+  "moment"
 ];
 
 // UMD/IIFE shared settings: output.globals
@@ -41,6 +42,7 @@ const external = [
 const globals = {
   // Provide global variable names to replace your external imports
   // eg. jquery: '$'
+  "moment": "moment"
 };
 
 // Customize configs for individual targets
@@ -76,7 +78,7 @@ if (!argv.format || argv.format === 'cjs') {
       compact: true,
       file: 'dist/k-form-js.ssr.js',
       format: 'cjs',
-      name: 'KFormJs',
+      name: 'KForm',
       exports: 'named',
       globals,
     },
@@ -103,7 +105,7 @@ if (!argv.format || argv.format === 'iife') {
       compact: true,
       file: 'dist/k-form-js.min.js',
       format: 'iife',
-      name: 'KFormJs',
+      name: 'KForm',
       exports: 'named',
       globals,
     },
