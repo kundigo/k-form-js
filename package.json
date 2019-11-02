@@ -1,14 +1,13 @@
 {
   "name": "k-form-js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Enhanced form components, inspired by formik, designed to work with server generated forms by Ruby on Rails",
   "author": {
     "name": "Dorian LUPU",
     "email": "dorian@kundigo.pro",
     "url": "https://twitter.com/dorianlupu"
   },
-  "contributors": [
-  ],
+  "contributors": [],
   "license": "Private code that belongs to KUNDIGO SASU, FRANCE",
   "main": "dist/k-form-js.ssr.js",
   "module": "dist/k-form-js.esm.js",
@@ -25,7 +24,7 @@
     "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife"
   },
   "dependencies": {
-    "moment": "^2.24.0"
+    "moment": ""
   },
   "devDependencies": {
     "cross-env": "^6.0.3",
