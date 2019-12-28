@@ -1,4 +1,4 @@
-'use strict';Object.defineProperty(exports,'__esModule',{value:true});function _interopDefault(e){return(e&&(typeof e==='object')&&'default'in e)?e['default']:e}var moment$1=_interopDefault(require('moment'));//
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});function _interopDefault(e){return(e&&(typeof e==='object')&&'default'in e)?e['default']:e}var moment$1=_interopDefault(require('moment')),Vue=_interopDefault(require('vue/dist/vue.esm')),Vuex=_interopDefault(require('vuex')),R=require('ramda'),kUtilsJs=require('k-utils-js');//
 //
 //
 //
@@ -154,7 +154,7 @@ var __vue_staticRenderFns__ = [];
   
 
   
-  var check_box = normalizeComponent(
+  var CheckBox = normalizeComponent(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
@@ -324,7 +324,7 @@ var __vue_staticRenderFns__$1 = [];
   
 
   
-  var date = normalizeComponent(
+  var Date = normalizeComponent(
     { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
     __vue_inject_styles__$1,
     __vue_script__$1,
@@ -473,7 +473,7 @@ var __vue_staticRenderFns__$2 = [];
   
 
   
-  var datetime = normalizeComponent(
+  var Datetime = normalizeComponent(
     { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
     __vue_inject_styles__$2,
     __vue_script__$2,
@@ -594,7 +594,7 @@ var __vue_staticRenderFns__$3 = [];
   
 
   
-  var field = normalizeComponent(
+  var Field = normalizeComponent(
     { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
     __vue_inject_styles__$3,
     __vue_script__$3,
@@ -676,7 +676,7 @@ var __vue_staticRenderFns__$4 = [];
   
 
   
-  var form = normalizeComponent(
+  var Form = normalizeComponent(
     { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
     __vue_inject_styles__$4,
     __vue_script__$4,
@@ -800,7 +800,7 @@ var __vue_staticRenderFns__$5 = [];
   
 
   
-  var select = normalizeComponent(
+  var Select = normalizeComponent(
     { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
     __vue_inject_styles__$5,
     __vue_script__$5,
@@ -921,7 +921,7 @@ var __vue_staticRenderFns__$6 = [];
   
 
   
-  var textarea = normalizeComponent(
+  var Textarea = normalizeComponent(
     { render: __vue_render__$6, staticRenderFns: __vue_staticRenderFns__$6 },
     __vue_inject_styles__$6,
     __vue_script__$6,
@@ -932,7 +932,117 @@ var __vue_staticRenderFns__$6 = [];
     undefined,
     undefined,
     undefined
-  );/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,CheckBox: check_box,Date: date,Datetime: datetime,Field: field,Form: form,Select: select,Textarea: textarea});// Import vue components
+  );var FormStore = function FormStore(ref) {
+  var obj;
+
+  var additionalComponents = ref.additionalComponents; if ( additionalComponents === void 0 ) additionalComponents = {};
+  var authenticityToken = ref.authenticityToken;
+  var element = ref.element;
+  var plugins = ref.plugins; if ( plugins === void 0 ) plugins = [];
+  var validationUrl = ref.validationUrl;
+  var values = ref.values; if ( values === void 0 ) values = {};
+  Vue.use(Vuex);
+
+  var defaultComponents = {
+    'k-form': Form,
+    'k-input': Field,
+    'k-textarea': Textarea,
+    'k-select': Select,
+    'k-date': Date,
+    'k-datetime': Datetime,
+    'k-check_box': CheckBox
+  };
+
+  var modelName = Object.keys(values)[0];
+
+  var initialState = {
+    values: values,
+    errors: ( obj = {}, obj[modelName] = R.pathOr({}, [modelName, "errors"], values), obj ),
+    touched: {},
+  };
+
+  this.store = new Vuex.Store({
+    state: initialState,
+    plugins: plugins,
+    getters:{
+      getValue: function (state) { return function (name) {
+        //let path = dotify(name);
+        var path = name.replace('[', '.').replace(']','');
+        return R.path(path.split('.'), state.values )
+      }; },
+      getError: function (state) { return function (name) {
+        //let path = dotify(name);
+        var path = name.replace('[', '.').replace(']','');
+        return R.path(path.split('.'), state.errors )
+      }; },
+      getTouched: function (state) { return function (name) {
+        //let path = dotify(name);
+        var path = name.replace('[', '.').replace(']','');
+        return (R.path(path.split('.'), state.touched ) || R.path([modelName, '_submit'], state.touched ))
+      }; },
+    },
+    mutations: {
+      setValue: function(state, payload) {
+        //let path = this.dotify(payload.name)
+        //console.log(payload)
+        var path = payload.name.replace('[', '.').replace(']','');
+        //console.log(path)
+        state.values = R.assocPath(path.split('.'), payload.value, state.values );
+      },
+      setTouched: function(state, payload) {
+        //let path = this.dotify(payload.name)
+
+        var path = payload.name.replace('[', '.').replace(']','');
+        state.touched = R.assocPath(path.split('.'), payload.value, state.touched );
+      },
+      setError: function(state, payload) {
+        //let path = this.dotify(payload.name)
+
+        var path = payload.name.replace('[', '.').replace(']','');
+        state.errors = R.assocPath(path.split('.'), payload.value, state.errors );
+      },
+    },
+    actions: {
+      refresh: function(context) {
+        var onSuccess = function (response) {
+          context.commit('setError', {
+            value: response.data[modelName].errors,
+            name: modelName
+          });
+        };
+
+        var onError = function (response) {
+          console.log('There was a problem with validating the data');
+          console.log(response);
+          //This exclusively to be able to see this in CI console reports (instead of '[object Object]'):
+          console.log(JSON.stringify(response, null, 2));
+        };
+
+        var data = Object.assign({
+          utf8: '✓',
+          authenticity_token: authenticityToken
+        }, context.state.values );
+
+        kUtilsJs.Api.sendRequest({url: validationUrl, data: data, method: 'POST', onSuccess: onSuccess, onError: onError, delay: true});
+      },
+      update: function(context, payload) {
+        context.commit('setValue', payload);
+        context.dispatch('refresh');
+      }
+    }
+
+  });
+
+  console.log(element);
+  console.log();
+  this.app = new Vue({
+    el: element,
+    store: this.store,
+    inheritAttrs: false,
+    components: Object.assign(defaultComponents, additionalComponents),
+    props: {},
+  });
+};/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,CheckBox: CheckBox,Date: Date,Datetime: Datetime,Field: Field,Form: Form,Select: Select,Textarea: Textarea,FormStore: FormStore});// Import vue components
 
 // install function executed by Vue.use()
 function install(Vue) {
@@ -958,4 +1068,4 @@ if (typeof window !== 'undefined') {
 }
 if (GlobalVue) {
   GlobalVue.use(plugin);
-}exports.CheckBox=check_box;exports.Date=date;exports.Datetime=datetime;exports.Field=field;exports.Form=form;exports.Select=select;exports.Textarea=textarea;exports.default=plugin;
+}exports.CheckBox=CheckBox;exports.Date=Date;exports.Datetime=Datetime;exports.Field=Field;exports.Form=Form;exports.FormStore=FormStore;exports.Select=Select;exports.Textarea=Textarea;exports.default=plugin;
