@@ -16,6 +16,7 @@ class FormStore  {
     additionalComponents = {},
     authenticityToken,
     element,
+    httpMethod = 'POST',
     plugins = [],
     validationUrl,
     values= {},
@@ -35,11 +36,19 @@ class FormStore  {
     const modelName = Object.keys(values)[0];
 
     let initialState = {
-      values: values,
+      values: {
+        [modelName]:  R.omit(['errors'], values[modelName])
+      },
       errors: {
         [modelName]: R.pathOr({}, [modelName, "errors"], values)
       },
       touched: {},
+      meta: {
+        modelName: modelName,
+        authenticityToken: authenticityToken,
+        validationUrl: validationUrl,
+        httpMethod: httpMethod,
+      }
     }
 
     this.store = new Vuex.Store({
@@ -47,19 +56,20 @@ class FormStore  {
       plugins: plugins,
       getters:{
         getValue: (state) => (name) => {
-          //let path = dotify(name);
           let path = name.replace('[', '.').replace(']','')
           return R.path(path.split('.'), state.values )
         },
         getError: (state) => (name) => {
-          //let path = dotify(name);
           let path = name.replace('[', '.').replace(']','')
           return R.path(path.split('.'), state.errors )
         },
         getTouched: (state) => (name) => {
-          //let path = dotify(name);
           let path = name.replace('[', '.').replace(']','')
           return (R.path(path.split('.'), state.touched ) || R.path([modelName, '_submit'], state.touched ))
+        },
+        getMeta: (state) => (name) => {
+          let path = name.replace('[', '.').replace(']','')
+          return R.path(path.split('.'), state.meta )
         },
       },
       mutations: {
@@ -99,12 +109,15 @@ class FormStore  {
             console.log(JSON.stringify(response, null, 2))
           };
 
-          const data = Object.assign({
+          let data = Object.assign({
             utf8: '✓',
-            authenticity_token: authenticityToken
-          }, context.state.values )
+            authenticity_token: context.state.meta.authenticityToken,
+            _method: context.state.meta.httpMethod,
+          }, R.clone(context.state.values) )
 
-          Api.sendRequest({url: validationUrl, data, method: 'POST', onSuccess, onError, delay: true})
+          data[modelName]._force_rollback = true
+
+          Api.sendRequest({url: context.state.meta.validationUrl, data, method: context.state.meta.httpMethod, onSuccess, onError, delay: true})
         },
         update: function(context, payload) {
           context.commit('setValue', payload)
