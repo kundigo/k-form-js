@@ -1,6 +1,6 @@
 {
   "name": "k-form-js",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Enhanced form components, inspired by formik, designed to work with server generated forms by Ruby on Rails",
   "author": {
     "name": "Dorian LUPU",

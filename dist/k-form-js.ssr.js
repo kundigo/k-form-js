@@ -933,11 +933,12 @@ var __vue_staticRenderFns__$6 = [];
     undefined,
     undefined
   );var FormStore = function FormStore(ref) {
-  var obj;
+  var obj, obj$1;
 
   var additionalComponents = ref.additionalComponents; if ( additionalComponents === void 0 ) additionalComponents = {};
   var authenticityToken = ref.authenticityToken;
   var element = ref.element;
+  var httpMethod = ref.httpMethod; if ( httpMethod === void 0 ) httpMethod = 'POST';
   var plugins = ref.plugins; if ( plugins === void 0 ) plugins = [];
   var validationUrl = ref.validationUrl;
   var values = ref.values; if ( values === void 0 ) values = {};
@@ -956,9 +957,15 @@ var __vue_staticRenderFns__$6 = [];
   var modelName = Object.keys(values)[0];
 
   var initialState = {
-    values: values,
-    errors: ( obj = {}, obj[modelName] = R.pathOr({}, [modelName, "errors"], values), obj ),
+    values: ( obj = {}, obj[modelName] = R.omit(['errors'], values[modelName]), obj ),
+    errors: ( obj$1 = {}, obj$1[modelName] = R.pathOr({}, [modelName, "errors"], values), obj$1 ),
     touched: {},
+    meta: {
+      modelName: modelName,
+      authenticityToken: authenticityToken,
+      validationUrl: validationUrl,
+      httpMethod: httpMethod,
+    }
   };
 
   this.store = new Vuex.Store({
@@ -966,19 +973,20 @@ var __vue_staticRenderFns__$6 = [];
     plugins: plugins,
     getters:{
       getValue: function (state) { return function (name) {
-        //let path = dotify(name);
         var path = name.replace('[', '.').replace(']','');
         return R.path(path.split('.'), state.values )
       }; },
       getError: function (state) { return function (name) {
-        //let path = dotify(name);
         var path = name.replace('[', '.').replace(']','');
         return R.path(path.split('.'), state.errors )
       }; },
       getTouched: function (state) { return function (name) {
-        //let path = dotify(name);
         var path = name.replace('[', '.').replace(']','');
         return (R.path(path.split('.'), state.touched ) || R.path([modelName, '_submit'], state.touched ))
+      }; },
+      getMeta: function (state) { return function (name) {
+        var path = name.replace('[', '.').replace(']','');
+        return R.path(path.split('.'), state.meta )
       }; },
     },
     mutations: {
@@ -1020,10 +1028,13 @@ var __vue_staticRenderFns__$6 = [];
 
         var data = Object.assign({
           utf8: '✓',
-          authenticity_token: authenticityToken
-        }, context.state.values );
+          authenticity_token: context.state.meta.authenticityToken,
+          _method: context.state.meta.httpMethod,
+        }, R.clone(context.state.values) );
 
-        kUtilsJs.Api.sendRequest({url: validationUrl, data: data, method: 'POST', onSuccess: onSuccess, onError: onError, delay: true});
+        data[modelName]._force_rollback = true;
+
+        kUtilsJs.Api.sendRequest({url: context.state.meta.validationUrl, data: data, method: context.state.meta.httpMethod, onSuccess: onSuccess, onError: onError, delay: true});
       },
       update: function(context, payload) {
         context.commit('setValue', payload);
