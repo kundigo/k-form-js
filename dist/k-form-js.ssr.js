@@ -642,11 +642,11 @@ var script$4 = {
   },
   methods:{
     "handleSubmit": function(event) {
-      if (!this.$store.getters.getError('interest._is_valid')) {
+      if (!this.$store.getters.getError(((this.$store.getters.getMeta('modelName')) + "._is_valid"))) {
         event.preventDefault();
         this.$store.commit('setTouched', {
                   value: true,
-                  name: 'interest._submit'
+                  name: ((this.$store.getters.getMeta('modelName')) + "._submit")
                 }
         );
       }
@@ -663,9 +663,9 @@ var __vue_staticRenderFns__$4 = [];
   /* style */
   var __vue_inject_styles__$4 = undefined;
   /* scoped */
-  var __vue_scope_id__$4 = "data-v-07535701";
+  var __vue_scope_id__$4 = "data-v-1ab81bf9";
   /* module identifier */
-  var __vue_module_identifier__$4 = "data-v-07535701";
+  var __vue_module_identifier__$4 = "data-v-1ab81bf9";
   /* functional template */
   var __vue_is_functional_template__$4 = false;
   /* style inject */

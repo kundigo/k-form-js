@@ -12,41 +12,41 @@
 </template>
 
 <script>
-export default {
+  export default {
 
-  props: {
-    "acceptCharset": {
-      type: String,
-      required: true,
-      default: 'UTF-8'
+    props: {
+      "acceptCharset": {
+        type: String,
+        required: true,
+        default: 'UTF-8'
+      },
+      "action": {
+        type: String,
+        required: true,
+      },
+      "enctype": {
+        type: String,
+      },
+      "method": {
+        type: String,
+        required: true,
+        default: "post"
+      }
     },
-    "action": {
-      type: String,
-      required: true,
-    },
-    "enctype": {
-      type: String,
-    },
-    "method": {
-      type: String,
-      required: true,
-      default: "post"
-    }
-  },
-  methods:{
-    "handleSubmit": function(event) {
-      if (!this.$store.getters.getError('interest._is_valid')) {
-        event.preventDefault();
-        this.$store.commit('setTouched', {
-                  value: true,
-                  name: 'interest._submit'
-                }
-        )
+    methods:{
+      "handleSubmit": function(event) {
+        if (!this.$store.getters.getError(`${this.$store.getters.getMeta('modelName')}._is_valid`)) {
+          event.preventDefault();
+          this.$store.commit('setTouched', {
+                    value: true,
+                    name: `${this.$store.getters.getMeta('modelName')}._submit`
+                  }
+          )
+        }
       }
     }
-  }
 
-}
+  }
 
 </script>
 
