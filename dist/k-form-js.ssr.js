@@ -1032,7 +1032,7 @@ var __vue_staticRenderFns__$6 = [];
           _method: context.state.meta.httpMethod,
         }, R.clone(context.state.values) );
 
-        data[modelName]._force_rollback = true;
+        data[modelName]._prevent_save = true;
 
         kUtilsJs.Api.sendRequest({url: context.state.meta.validationUrl, data: data, method: context.state.meta.httpMethod, onSuccess: onSuccess, onError: onError, delay: true});
       },
