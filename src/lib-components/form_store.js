@@ -115,7 +115,7 @@ class FormStore  {
             _method: context.state.meta.httpMethod,
           }, R.clone(context.state.values) )
 
-          data[modelName]._force_rollback = true
+          data[modelName]._prevent_save = true
 
           Api.sendRequest({url: context.state.meta.validationUrl, data, method: context.state.meta.httpMethod, onSuccess, onError, delay: true})
         },
