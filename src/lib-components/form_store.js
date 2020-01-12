@@ -1,7 +1,7 @@
 import Vue from 'vue/dist/vue.esm'
 import Vuex from 'vuex'
 import * as R from 'ramda'
-import { Api } from 'k-utils-js'
+import { Api, Utils } from 'k-utils-js'
 import CheckBox from './check_box.vue'
 import Date from './date.vue'
 import Datetime from './datetime.vue'
@@ -11,7 +11,6 @@ import Select from './select.vue'
 import Textarea from './textarea.vue'
 
 class FormStore  {
-
   constructor({
     additionalComponents = {},
     authenticityToken,
@@ -56,40 +55,33 @@ class FormStore  {
       plugins: plugins,
       getters:{
         getValue: (state) => (name) => {
-          let path = name.replace('[', '.').replace(']','')
+          let path = Utils.dotify(name)
           return R.path(path.split('.'), state.values )
         },
         getError: (state) => (name) => {
-          let path = name.replace('[', '.').replace(']','')
+          let path = Utils.dotify(name)
           return R.path(path.split('.'), state.errors )
         },
         getTouched: (state) => (name) => {
-          let path = name.replace('[', '.').replace(']','')
+          let path = Utils.dotify(name)
           return (R.path(path.split('.'), state.touched ) || R.path([modelName, '_submit'], state.touched ))
         },
         getMeta: (state) => (name) => {
-          let path = name.replace('[', '.').replace(']','')
+          let path = Utils.dotify(name)
           return R.path(path.split('.'), state.meta )
         },
       },
       mutations: {
         setValue: function(state, payload) {
-          //let path = this.dotify(payload.name)
-          //console.log(payload)
-          let path = payload.name.replace('[', '.').replace(']','')
-          //console.log(path)
+          let path = Utils.dotify(payload.name)
           state.values = R.assocPath(path.split('.'), payload.value, state.values )
         },
         setTouched: function(state, payload) {
-          //let path = this.dotify(payload.name)
-
-          let path = payload.name.replace('[', '.').replace(']','')
+          let path = Utils.dotify(payload.name)
           state.touched = R.assocPath(path.split('.'), payload.value, state.touched )
         },
         setError: function(state, payload) {
-          //let path = this.dotify(payload.name)
-
-          let path = payload.name.replace('[', '.').replace(']','')
+          let path = Utils.dotify(payload.name)
           state.errors = R.assocPath(path.split('.'), payload.value, state.errors )
         },
       },
@@ -127,8 +119,6 @@ class FormStore  {
 
     });
 
-    console.log(element)
-    console.log()
     this.app = new Vue({
       el: element,
       store: this.store,
