@@ -973,40 +973,33 @@ var __vue_staticRenderFns__$6 = [];
     plugins: plugins,
     getters:{
       getValue: function (state) { return function (name) {
-        var path = name.replace('[', '.').replace(']','');
+        var path = kUtilsJs.Utils.dotify(name);
         return R.path(path.split('.'), state.values )
       }; },
       getError: function (state) { return function (name) {
-        var path = name.replace('[', '.').replace(']','');
+        var path = kUtilsJs.Utils.dotify(name);
         return R.path(path.split('.'), state.errors )
       }; },
       getTouched: function (state) { return function (name) {
-        var path = name.replace('[', '.').replace(']','');
+        var path = kUtilsJs.Utils.dotify(name);
         return (R.path(path.split('.'), state.touched ) || R.path([modelName, '_submit'], state.touched ))
       }; },
       getMeta: function (state) { return function (name) {
-        var path = name.replace('[', '.').replace(']','');
+        var path = kUtilsJs.Utils.dotify(name);
         return R.path(path.split('.'), state.meta )
       }; },
     },
     mutations: {
       setValue: function(state, payload) {
-        //let path = this.dotify(payload.name)
-        //console.log(payload)
-        var path = payload.name.replace('[', '.').replace(']','');
-        //console.log(path)
+        var path = kUtilsJs.Utils.dotify(payload.name);
         state.values = R.assocPath(path.split('.'), payload.value, state.values );
       },
       setTouched: function(state, payload) {
-        //let path = this.dotify(payload.name)
-
-        var path = payload.name.replace('[', '.').replace(']','');
+        var path = kUtilsJs.Utils.dotify(payload.name);
         state.touched = R.assocPath(path.split('.'), payload.value, state.touched );
       },
       setError: function(state, payload) {
-        //let path = this.dotify(payload.name)
-
-        var path = payload.name.replace('[', '.').replace(']','');
+        var path = kUtilsJs.Utils.dotify(payload.name);
         state.errors = R.assocPath(path.split('.'), payload.value, state.errors );
       },
     },
@@ -1044,8 +1037,6 @@ var __vue_staticRenderFns__$6 = [];
 
   });
 
-  console.log(element);
-  console.log();
   this.app = new Vue({
     el: element,
     store: this.store,
