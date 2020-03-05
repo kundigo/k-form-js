@@ -1,63 +1,69 @@
-'use strict';Object.defineProperty(exports,'__esModule',{value:true});function _interopDefault(e){return(e&&(typeof e==='object')&&'default'in e)?e['default']:e}var moment$1=_interopDefault(require('moment')),Vue=_interopDefault(require('vue/dist/vue.esm')),Vuex=_interopDefault(require('vuex')),R=require('ramda'),kUtilsJs=require('k-utils-js');//
-//
-//
-//
-//
-//
-//
-//
-//
-
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});function _interopDefault(e){return(e&&(typeof e==='object')&&'default'in e)?e['default']:e}var kUtilsJs=require('k-utils-js'),moment=_interopDefault(require('moment')),Vue=_interopDefault(require('vue/dist/vue.esm')),Vuex=_interopDefault(require('vuex')),R=require('ramda');//
 var script = {
-    inheritAttrs: false,
-    props: {
-        unchecked_value: {
-            type:String,
-            required:true
-        },
-        name:{
-            type:String,
-            require:true
-        },
-        value: {
-            type:String,
-            required:true
-        }
+  inheritAttrs: false,
+  props: {
+    unchecked_value: {
+      type:String,
+      required:true
     },
-    computed: {
-        inputError: function() {
-            if (this.inputTouched) {
-                return this.$store.getters.getError(this.$props.name)
-            } else {
-                return null
-            }
-        },
-        inputTouched: {
-            get: function get () {
-                return this.$store.getters.getTouched(this.$props.name)
-            },
-            set: function set (value) {
-                this.$store.commit('setTouched', {
-                        value: value,
-                        name: this.$props.name
-                    }
-                );
-            }
-        },
-        inputValue: {
-            get: function get () {
-                var value = this.$store.getters.getValue(this.$props.name);
-                return ((value === true) || (value === this.$props.name))
-            },
-            set: function set (value) {
-                this.$store.dispatch('update', {
-                        value: value ? this.$props.value : this.$props.unchecked_value,
-                        name: this.$props.name
-                    }
-                );
-            }
-        },
+    name:{
+      type:String,
+      require:true
     },
+    id:{
+      type:String,
+      require:true
+    },
+    value: {
+      type:String,
+      required:true
+    }
+  },
+  computed: {
+    displayValidationError: function(){
+      return this.inputTouched && this.inputError
+    },
+    inputClass: function(){
+      return {
+        "is-invalid": (this.displayValidationError), //r equired in order to be able to display the error message in red
+      }
+    },
+    inputError: function() {
+      var error = this.$store.getters.getError(this.$props.name);
+      if (this.inputTouched) {
+        return (kUtilsJs.Utils.isBlank(error) ? null : error)
+      } else {
+        return null
+      }
+    },
+    inputTouched: {
+      get: function get () {
+        return this.$store.getters.getTouched(this.$props.name)
+      },
+      set: function set (value) {
+        console.log('set touch', value, this.$props.name);
+        this.$store.commit('setTouched', {
+            value: value,
+            name: this.$props.name
+          }
+        );
+      }
+    },
+    inputValue: {
+      get: function get () {
+        var value = this.$store.getters.getValue(this.$props.name);
+        return ((value === true) || (value === this.$props.name))
+      },
+      set: function set (value) {
+        console.log('update', value, this.$props.name);
+        this.$store.dispatch('update', {
+            value: value ? this.$props.value : this.$props.unchecked_value,
+            name: this.$props.name
+          }
+        );
+      }
+    },
+  },
 };function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
     if (typeof shadowMode !== 'boolean') {
         createInjectorSSR = createInjector;
@@ -135,7 +141,7 @@ var script = {
 var __vue_script__ = script;
 
 /* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"custom-control custom-checkbox"},[_vm._ssrNode("<input type=\"hidden\""+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("value",_vm.unchecked_value))+"> "+((((this.$attrs).type)==='checkbox')?("<input"+(_vm._ssrAttr("name",_vm.name))+" type=\"checkbox\""+(_vm._ssrAttr("value",_vm.value))+(_vm._ssrAttr("checked",Array.isArray(_vm.inputValue)?_vm._i(_vm.inputValue,_vm.value)>-1:(_vm.inputValue)))+(_vm._ssrAttrs(this.$attrs))+">"):(((this.$attrs).type)==='radio')?("<input"+(_vm._ssrAttr("name",_vm.name))+" type=\"radio\""+(_vm._ssrAttr("value",_vm.value))+(_vm._ssrAttr("checked",_vm._q(_vm.inputValue,_vm.value)))+(_vm._ssrAttrs(this.$attrs))+">"):("<input"+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("type",(this.$attrs).type))+(_vm._ssrAttr("value",_vm.value))+(_vm._ssrAttr("value",(_vm.inputValue)))+(_vm._ssrAttrs(this.$attrs))+">"))+" "+((_vm.inputTouched)?("<div class=\"invalid-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputError)+"  ")+"</div>"):"<!---->"))])};
+var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"custom-control custom-checkbox"},[_vm._ssrNode("<input type=\"hidden\""+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("value",_vm.unchecked_value))+"> "+((((this.$attrs).type)==='checkbox')?("<input"+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("id",_vm.id))+" type=\"checkbox\""+(_vm._ssrAttr("value",_vm.value))+(_vm._ssrAttr("checked",Array.isArray(_vm.inputValue)?_vm._i(_vm.inputValue,_vm.value)>-1:(_vm.inputValue)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+">"):(((this.$attrs).type)==='radio')?("<input"+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("id",_vm.id))+" type=\"radio\""+(_vm._ssrAttr("value",_vm.value))+(_vm._ssrAttr("checked",_vm._q(_vm.inputValue,_vm.value)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+">"):("<input"+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("id",_vm.id))+(_vm._ssrAttr("type",(this.$attrs).type))+(_vm._ssrAttr("value",_vm.value))+(_vm._ssrAttr("value",(_vm.inputValue)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+">"))+" "+((_vm.displayValidationError)?("<div"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"invalid-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputError)+"  ")+"</div>"):"<!---->"))])};
 var __vue_staticRenderFns__ = [];
 
   /* style */
@@ -143,7 +149,7 @@ var __vue_staticRenderFns__ = [];
   /* scoped */
   var __vue_scope_id__ = undefined;
   /* module identifier */
-  var __vue_module_identifier__ = "data-v-56e3459c";
+  var __vue_module_identifier__ = "data-v-e3c4dba8";
   /* functional template */
   var __vue_is_functional_template__ = false;
   /* style inject */
@@ -166,24 +172,6 @@ var __vue_staticRenderFns__ = [];
     undefined,
     undefined
   );//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 var script$1 = {
     inheritAttrs: false,
@@ -195,21 +183,22 @@ var script$1 = {
             type:String,
             require:true
         },
+      id:{
+        type:String,
+        require:true
+      },
         prepend: {
             type:String,
         }
     },
     computed: {
-        // class: function() {
-        //    return [
-        //       "input-group",
-        //       this.$props.class
-        //    ]
-        // },
+      displayValidationError: function(){
+        return this.inputTouched && this.inputError
+      },
         inputClass: function() {
             return {
                 "form-control": true,
-                "is-invalid": (this.inputTouched && this.inputError),
+                "is-invalid": (this.displayValidationError),
                 "datetimepicker": true
             }
         },
@@ -298,14 +287,14 @@ var script$1 = {
                 onChangeDateTime: handleChange
             };
 
-            $(this.$refs.input).datetimepicker(dateTimeOptions);
+            window.$(this.$refs.input).datetimepicker(dateTimeOptions);
         });
     }
 };/* script */
 var __vue_script__$1 = script$1;
 
 /* template */
-var __vue_render__$1 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.inputGroupClass},[_vm._ssrNode(((_vm.prepend)?("<div class=\"input-group-prepend\"><span class=\"input-group-text\">"+(_vm._s(_vm.prepend))+"</span></div>"):"<!---->")+" <input type=\"hidden\""+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("value",_vm.inputValue))+"> "+((((this.$attrs).type)==='checkbox')?("<input type=\"checkbox\""+(_vm._ssrAttr("checked",Array.isArray(_vm.inputFormattedValue)?_vm._i(_vm.inputFormattedValue,null)>-1:(_vm.inputFormattedValue)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+">"):(((this.$attrs).type)==='radio')?("<input type=\"radio\""+(_vm._ssrAttr("checked",_vm._q(_vm.inputFormattedValue,null)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+">"):("<input"+(_vm._ssrAttr("type",(this.$attrs).type))+(_vm._ssrAttr("value",(_vm.inputFormattedValue)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+">"))+" "+((_vm.append)?("<div class=\"input-group-append\"><span class=\"input-group-text\">"+(_vm._s(_vm.append))+"</span></div>"):"<!---->")+" "+((_vm.inputTouched)?("<div class=\"invalid-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputError)+"  ")+"</div>"):"<!---->"))])};
+var __vue_render__$1 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.inputGroupClass},[_vm._ssrNode(((_vm.prepend)?("<div"+(_vm._ssrAttr("id",_vm.id + '__prepend'))+" class=\"input-group-prepend\"><span class=\"input-group-text\">"+(_vm._s(_vm.prepend))+"</span></div>"):"<!---->")+" <input type=\"hidden\""+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("value",_vm.inputValue))+"> "+((((this.$attrs).type)==='checkbox')?("<input"+(_vm._ssrAttr("id",_vm.id))+" type=\"checkbox\""+(_vm._ssrAttr("checked",Array.isArray(_vm.inputFormattedValue)?_vm._i(_vm.inputFormattedValue,null)>-1:(_vm.inputFormattedValue)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+">"):(((this.$attrs).type)==='radio')?("<input"+(_vm._ssrAttr("id",_vm.id))+" type=\"radio\""+(_vm._ssrAttr("checked",_vm._q(_vm.inputFormattedValue,null)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+">"):("<input"+(_vm._ssrAttr("id",_vm.id))+(_vm._ssrAttr("type",(this.$attrs).type))+(_vm._ssrAttr("value",(_vm.inputFormattedValue)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+">"))+" "+((_vm.append)?("<div"+(_vm._ssrAttr("id",_vm.id + '__append'))+" class=\"input-group-append\"><span class=\"input-group-text\">"+(_vm._s(_vm.append))+"</span></div>"):"<!---->")+" "+((_vm.displayValidationError)?("<div"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"invalid-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputError)+"  ")+"</div>"):"<!---->"))])};
 var __vue_staticRenderFns__$1 = [];
 
   /* style */
@@ -313,7 +302,7 @@ var __vue_staticRenderFns__$1 = [];
   /* scoped */
   var __vue_scope_id__$1 = undefined;
   /* module identifier */
-  var __vue_module_identifier__$1 = "data-v-0bdb5e5e";
+  var __vue_module_identifier__$1 = "data-v-36fac8fc";
   /* functional template */
   var __vue_is_functional_template__$1 = false;
   /* style inject */
@@ -346,17 +335,18 @@ var script$2 = {
             type:String,
             require:true
         },
+      id:{
+        type:String,
+        require:true
+      },
         prepend: {
             type:String,
         }
     },
     computed: {
-        // class: function() {
-        //    return [
-        //       "input-group",
-        //       this.$props.class
-        //    ]
-        // },
+      displayValidationError: function(){
+        return this.inputTouched && this.inputError
+      },
         inputClass: function() {
             return {
                 "form-control": true,
@@ -406,7 +396,7 @@ var script$2 = {
         inputFormattedValue: {
             get: function get () {
                 var value = this.$store.getters.getValue(this.$props.name);
-                var date = moment$1(value, 'YYYY-MM-DD HH:mm');
+                var date = moment(value, 'YYYY-MM-DD HH:mm');
                 if (date.isValid()) {
                     return date.format('DD/MM/YYYY HH:mm')
                 } else {
@@ -419,7 +409,7 @@ var script$2 = {
                     // TODO: use a more restrictive regexp
                     return
                 }
-                var date = moment$1(value, 'DD/MM/YYYY HH:mm');
+                var date = moment(value, 'DD/MM/YYYY HH:mm');
 
                 this.$store.dispatch('update', {
                         value: date.isValid() ? date.format('YYYY-MM-DD HH:mm') : '',
@@ -447,14 +437,15 @@ var script$2 = {
                 scrollInput: false,
                 onChangeDateTime: handleChange
             };
-            $(this.$refs.input).datetimepicker(dateTimeOptions);
+
+            window.$(this.$refs.input).datetimepicker(dateTimeOptions);
         });
     }
 };/* script */
 var __vue_script__$2 = script$2;
 
 /* template */
-var __vue_render__$2 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.inputGroupClass},[_vm._ssrNode(((_vm.prepend)?("<div class=\"input-group-prepend\"><span class=\"input-group-text\">"+(_vm._s(_vm.prepend))+"</span></div>"):"<!---->")+" <input type=\"hidden\""+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("value",_vm.inputValue))+"> "+((((this.$attrs).type)==='checkbox')?("<input type=\"checkbox\""+(_vm._ssrAttr("checked",Array.isArray(_vm.inputFormattedValue)?_vm._i(_vm.inputFormattedValue,null)>-1:(_vm.inputFormattedValue)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+">"):(((this.$attrs).type)==='radio')?("<input type=\"radio\""+(_vm._ssrAttr("checked",_vm._q(_vm.inputFormattedValue,null)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+">"):("<input"+(_vm._ssrAttr("type",(this.$attrs).type))+(_vm._ssrAttr("value",(_vm.inputFormattedValue)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+">"))+" "+((_vm.append)?("<div class=\"input-group-append\"><span class=\"input-group-text\">"+(_vm._s(_vm.append))+"</span></div>"):"<!---->")+" "+((_vm.inputTouched)?("<div class=\"invalid-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputError)+"  ")+"</div>"):"<!---->"))])};
+var __vue_render__$2 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.inputGroupClass},[_vm._ssrNode(((_vm.prepend)?("<div"+(_vm._ssrAttr("id",_vm.id + '__prepend'))+" class=\"input-group-prepend\"><span class=\"input-group-text\">"+(_vm._s(_vm.prepend))+"</span></div>"):"<!---->")+" <input type=\"hidden\""+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("value",_vm.inputValue))+"> "+((((this.$attrs).type)==='checkbox')?("<input"+(_vm._ssrAttr("id",_vm.id))+" type=\"checkbox\""+(_vm._ssrAttr("checked",Array.isArray(_vm.inputFormattedValue)?_vm._i(_vm.inputFormattedValue,null)>-1:(_vm.inputFormattedValue)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+">"):(((this.$attrs).type)==='radio')?("<input"+(_vm._ssrAttr("id",_vm.id))+" type=\"radio\""+(_vm._ssrAttr("checked",_vm._q(_vm.inputFormattedValue,null)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+">"):("<input"+(_vm._ssrAttr("id",_vm.id))+(_vm._ssrAttr("type",(this.$attrs).type))+(_vm._ssrAttr("value",(_vm.inputFormattedValue)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+">"))+" "+((_vm.append)?("<div"+(_vm._ssrAttr("id",_vm.id + '__append'))+" class=\"input-group-append\"><span class=\"input-group-text\">"+(_vm._s(_vm.append))+"</span></div>"):"<!---->")+" "+((_vm.displayValidationError)?("<div"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"invalid-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputError)+"  ")+"</div>"):"<!---->"))])};
 var __vue_staticRenderFns__$2 = [];
 
   /* style */
@@ -462,7 +453,7 @@ var __vue_staticRenderFns__$2 = [];
   /* scoped */
   var __vue_scope_id__$2 = undefined;
   /* module identifier */
-  var __vue_module_identifier__$2 = "data-v-77437c64";
+  var __vue_module_identifier__$2 = "data-v-464baebe";
   /* functional template */
   var __vue_is_functional_template__$2 = false;
   /* style inject */
@@ -513,17 +504,18 @@ var script$3 = {
           type:String,
           require:true
        },
+       id:{
+          type:String,
+          require:true
+       },
        prepend: {
           type:String,
        }
     },
     computed: {
-        // class: function() {
-        //    return [
-        //       "input-group",
-        //       this.$props.class
-        //    ]
-        // },
+       displayValidationError: function(){
+          return this.inputTouched && this.inputError
+       },
        inputClass: function() {
           return {
              "form-control": true,
@@ -575,7 +567,7 @@ var script$3 = {
 var __vue_script__$3 = script$3;
 
 /* template */
-var __vue_render__$3 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.inputGroupClass},[_vm._ssrNode(((_vm.prepend)?("<div class=\"input-group-prepend\"><span class=\"input-group-text\">"+(_vm._s(_vm.prepend))+"</span></div>"):"<!---->")+" "+((((this.$attrs).type)==='checkbox')?("<input"+(_vm._ssrAttr("name",_vm.name))+" type=\"checkbox\""+(_vm._ssrAttr("checked",Array.isArray(_vm.inputValue)?_vm._i(_vm.inputValue,null)>-1:(_vm.inputValue)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+">"):(((this.$attrs).type)==='radio')?("<input"+(_vm._ssrAttr("name",_vm.name))+" type=\"radio\""+(_vm._ssrAttr("checked",_vm._q(_vm.inputValue,null)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+">"):("<input"+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("type",(this.$attrs).type))+(_vm._ssrAttr("value",(_vm.inputValue)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+">"))+" "+((_vm.append)?("<div class=\"input-group-append\"><span class=\"input-group-text\">"+(_vm._s(_vm.append))+"</span></div>"):"<!---->")+" "+((_vm.inputTouched)?("<div class=\"invalid-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputError)+"  ")+"</div>"):"<!---->"))])};
+var __vue_render__$3 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.inputGroupClass},[_vm._ssrNode(((_vm.prepend)?("<div"+(_vm._ssrAttr("id",_vm.id + '__prepend'))+" class=\"input-group-prepend\"><span class=\"input-group-text\">"+(_vm._s(_vm.prepend))+"</span></div>"):"<!---->")+" "+((((this.$attrs).type)==='checkbox')?("<input"+(_vm._ssrAttr("id",_vm.id))+(_vm._ssrAttr("name",_vm.name))+" type=\"checkbox\""+(_vm._ssrAttr("checked",Array.isArray(_vm.inputValue)?_vm._i(_vm.inputValue,null)>-1:(_vm.inputValue)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+">"):(((this.$attrs).type)==='radio')?("<input"+(_vm._ssrAttr("id",_vm.id))+(_vm._ssrAttr("name",_vm.name))+" type=\"radio\""+(_vm._ssrAttr("checked",_vm._q(_vm.inputValue,null)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+">"):("<input"+(_vm._ssrAttr("id",_vm.id))+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("type",(this.$attrs).type))+(_vm._ssrAttr("value",(_vm.inputValue)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+">"))+" "+((_vm.append)?("<div"+(_vm._ssrAttr("id",_vm.id + '__append'))+" class=\"input-group-append\"><span class=\"input-group-text\">"+(_vm._s(_vm.append))+"</span></div>"):"<!---->")+" "+((_vm.displayValidationError)?("<div"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"invalid-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputError)+"  ")+"</div>"):"<!---->"))])};
 var __vue_staticRenderFns__$3 = [];
 
   /* style */
@@ -583,7 +575,7 @@ var __vue_staticRenderFns__$3 = [];
   /* scoped */
   var __vue_scope_id__$3 = undefined;
   /* module identifier */
-  var __vue_module_identifier__$3 = "data-v-755eff79";
+  var __vue_module_identifier__$3 = "data-v-e989dce2";
   /* functional template */
   var __vue_is_functional_template__$3 = false;
   /* style inject */
@@ -718,17 +710,18 @@ var script$5 = {
            type:String,
            require:true
         },
+       id:{
+          type:String,
+          require:true
+       },
        prepend: {
           type:String,
        }
     },
     computed: {
-        // class: function() {
-        //    return [
-        //       "input-group",
-        //       this.$props.class
-        //    ]
-        // },
+       displayValidationError: function(){
+          return this.inputTouched && this.inputError
+       },
        inputClass: function() {
           return {
              //"form-control": true,
@@ -781,7 +774,7 @@ var script$5 = {
 var __vue_script__$5 = script$5;
 
 /* template */
-var __vue_render__$5 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.inputGroupClass},[_vm._ssrNode(((_vm.prepend)?("<div class=\"input-group-prepend\"><span class=\"input-group-text\">"+(_vm._s(_vm.prepend))+"</span></div>"):"<!---->")+" "),_c('select',_vm._b({directives:[{name:"model",rawName:"v-model",value:(_vm.inputValue),expression:"inputValue"}],class:_vm.inputClass,attrs:{"name":_vm.name},on:{"focus":function($event){_vm.inputTouched=true;},"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.inputValue=$event.target.multiple ? $$selectedVal : $$selectedVal[0];}}},'select',this.$attrs,false),[_vm._t("default")],2),_vm._ssrNode(" "+((_vm.append)?("<div class=\"input-group-append\"><span class=\"input-group-text\">"+(_vm._s(_vm.append))+"</span></div>"):"<!---->")+" "+((_vm.inputTouched)?("<div class=\"invalid-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputError)+"  ")+"</div>"):"<!---->"))],2)};
+var __vue_render__$5 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.inputGroupClass},[_vm._ssrNode(((_vm.prepend)?("<div"+(_vm._ssrAttr("id",_vm.id + '__prepend'))+" class=\"input-group-prepend\"><span class=\"input-group-text\">"+(_vm._s(_vm.prepend))+"</span></div>"):"<!---->")+" "),_c('select',_vm._b({directives:[{name:"model",rawName:"v-model",value:(_vm.inputValue),expression:"inputValue"}],class:_vm.inputClass,attrs:{"id":_vm.id,"name":_vm.name},on:{"focus":function($event){_vm.inputTouched=true;},"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.inputValue=$event.target.multiple ? $$selectedVal : $$selectedVal[0];}}},'select',this.$attrs,false),[_vm._t("default")],2),_vm._ssrNode(" "+((_vm.append)?("<div"+(_vm._ssrAttr("id",_vm.id + '__append'))+" class=\"input-group-append\"><span class=\"input-group-text\">"+(_vm._s(_vm.append))+"</span></div>"):"<!---->")+" "+((_vm.displayValidationError)?("<div"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"invalid-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputError)+"  ")+"</div>"):"<!---->"))],2)};
 var __vue_staticRenderFns__$5 = [];
 
   /* style */
@@ -789,7 +782,7 @@ var __vue_staticRenderFns__$5 = [];
   /* scoped */
   var __vue_scope_id__$5 = undefined;
   /* module identifier */
-  var __vue_module_identifier__$5 = "data-v-1caedde8";
+  var __vue_module_identifier__$5 = "data-v-05dfe41c";
   /* functional template */
   var __vue_is_functional_template__$5 = false;
   /* style inject */
@@ -836,6 +829,10 @@ var script$6 = {
         append: {
            type:String,
         },
+       id:{
+          type:String,
+          require:true
+       },
         name:{
            type:String,
            require:true
@@ -845,12 +842,9 @@ var script$6 = {
        }
     },
     computed: {
-        // class: function() {
-        //    return [
-        //       "input-group",
-        //       this.$props.class
-        //    ]
-        // },
+       displayValidationError: function(){
+          return this.inputTouched && this.inputError
+       },
        inputClass: function() {
           return {
              "form-control": true,
@@ -902,7 +896,7 @@ var script$6 = {
 var __vue_script__$6 = script$6;
 
 /* template */
-var __vue_render__$6 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.inputGroupClass},[_vm._ssrNode(((_vm.prepend)?("<div class=\"input-group-prepend\"><span class=\"input-group-text\">"+(_vm._s(_vm.prepend))+"</span></div>"):"<!---->")+" <textarea"+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+">"+_vm._ssrEscape(_vm._s(_vm.inputValue))+"</textarea> "+((_vm.append)?("<div class=\"input-group-append\"><span class=\"input-group-text\">"+(_vm._s(_vm.append))+"</span></div>"):"<!---->")+" "+((_vm.inputTouched)?("<div class=\"invalid-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputError)+"  ")+"</div>"):"<!---->"))])};
+var __vue_render__$6 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.inputGroupClass},[_vm._ssrNode(((_vm.prepend)?("<div"+(_vm._ssrAttr("id",_vm.id + '__prepend'))+" class=\"input-group-prepend\"><span class=\"input-group-text\">"+(_vm._s(_vm.prepend))+"</span></div>"):"<!---->")+" <textarea"+(_vm._ssrAttr("id",_vm.id))+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+">"+_vm._ssrEscape(_vm._s(_vm.inputValue))+"</textarea> "+((_vm.append)?("<div"+(_vm._ssrAttr("id",_vm.id + '__append'))+" class=\"input-group-append\"><span class=\"input-group-text\">"+(_vm._s(_vm.append))+"</span></div>"):"<!---->")+" "+((_vm.displayValidationError)?("<div"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"invalid-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputError)+"  ")+"</div>"):"<!---->"))])};
 var __vue_staticRenderFns__$6 = [];
 
   /* style */
@@ -910,7 +904,7 @@ var __vue_staticRenderFns__$6 = [];
   /* scoped */
   var __vue_scope_id__$6 = undefined;
   /* module identifier */
-  var __vue_module_identifier__$6 = "data-v-b9e563fa";
+  var __vue_module_identifier__$6 = "data-v-5c4670e1";
   /* functional template */
   var __vue_is_functional_template__$6 = false;
   /* style inject */
