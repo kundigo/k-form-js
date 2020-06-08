@@ -610,6 +610,7 @@ var __vue_staticRenderFns__$3 = [];
 //
 //
 //
+//
 
 var script$4 = {
 
@@ -642,6 +643,14 @@ var script$4 = {
                 }
         );
       }
+    },
+
+    "ignoreRailsUjs": function(event) {
+      // make that when using rails ujs with remote:true (aka local:false) we do not send the form if the data is valid
+      // note: the is no tests for this specific case !!
+      if (!this.$store.getters.getError(((this.$store.getters.getMeta('modelName')) + "._is_valid"))) {
+        event.preventDefault();
+      }
     }
   }
 
@@ -649,15 +658,15 @@ var script$4 = {
 var __vue_script__$4 = script$4;
 
 /* template */
-var __vue_render__$4 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('form',{attrs:{"accept-charset":_vm.$props.acceptCharset,"action":_vm.$props.action,"data-values":_vm.$props.dataValues,"method":_vm.$props.method,"enctype":_vm.$props.enctype},on:{"submit":_vm.handleSubmit}},[_vm._t("default")],2)};
+var __vue_render__$4 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('form',{attrs:{"accept-charset":_vm.$props.acceptCharset,"action":_vm.$props.action,"data-values":_vm.$props.dataValues,"method":_vm.$props.method,"enctype":_vm.$props.enctype},on:{"submit":_vm.handleSubmit,"ajax:beforeSend":_vm.ignoreRailsUjs}},[_vm._t("default")],2)};
 var __vue_staticRenderFns__$4 = [];
 
   /* style */
   var __vue_inject_styles__$4 = undefined;
   /* scoped */
-  var __vue_scope_id__$4 = "data-v-1ab81bf9";
+  var __vue_scope_id__$4 = "data-v-32f7a524";
   /* module identifier */
-  var __vue_module_identifier__$4 = "data-v-1ab81bf9";
+  var __vue_module_identifier__$4 = "data-v-32f7a524";
   /* functional template */
   var __vue_is_functional_template__$4 = false;
   /* style inject */
