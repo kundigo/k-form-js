@@ -1,4 +1,4 @@
-'use strict';Object.defineProperty(exports,'__esModule',{value:true});function _interopDefault(e){return(e&&(typeof e==='object')&&'default'in e)?e['default']:e}var kUtilsJs=require('k-utils-js'),moment=_interopDefault(require('moment')),Vue=_interopDefault(require('vue/dist/vue.esm')),Vuex=_interopDefault(require('vuex')),R=require('ramda');//
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});function _interopDefault(e){return(e&&(typeof e==='object')&&'default'in e)?e['default']:e}var kUtilsJs=require('k-utils-js'),moment=_interopDefault(require('moment')),R=require('ramda'),Vue=_interopDefault(require('vue/dist/vue.esm')),Vuex=_interopDefault(require('vuex'));//
 var script = {
   inheritAttrs: false,
   props: {
@@ -253,7 +253,7 @@ var script$1 = {
             },
             set: function set (value) {
 
-                if (!value.match(/^[0-9]{2}[/][0-9]{2}[/][0-9]{4}$/)){
+                if (!R.isNil(value) && !R.isEmpty(value) && !value.match(/^[0-9]{2}[/][0-9]{2}[/][0-9]{4}$/)){
                     // user is typing a new date, wait for him to finish
                     // TODO: use a more restrictive regexp
                     return
@@ -302,7 +302,7 @@ var __vue_staticRenderFns__$1 = [];
   /* scoped */
   var __vue_scope_id__$1 = undefined;
   /* module identifier */
-  var __vue_module_identifier__$1 = "data-v-36fac8fc";
+  var __vue_module_identifier__$1 = "data-v-5f0c4c90";
   /* functional template */
   var __vue_is_functional_template__$1 = false;
   /* style inject */
@@ -325,6 +325,7 @@ var __vue_staticRenderFns__$1 = [];
     undefined,
     undefined
   );//
+
 var script$2 = {
     inheritAttrs: false,
     props: {
@@ -404,7 +405,7 @@ var script$2 = {
                 }
             },
             set: function set (value) {
-                if (!value.match(/^[0-9]{2}[/][0-9]{2}[/][0-9]{4} [0-9]{2}:[0-9]{2}$/)){
+                if (!R.isNil(value) && !R.isEmpty(value) && !value.match(/^[0-9]{2}[/][0-9]{2}[/][0-9]{4} [0-9]{2}:[0-9]{2}$/)){
                     // user is typing a new date, wait for him to finish
                     // TODO: use a more restrictive regexp
                     return
@@ -453,7 +454,7 @@ var __vue_staticRenderFns__$2 = [];
   /* scoped */
   var __vue_scope_id__$2 = undefined;
   /* module identifier */
-  var __vue_module_identifier__$2 = "data-v-464baebe";
+  var __vue_module_identifier__$2 = "data-v-e9a944dc";
   /* functional template */
   var __vue_is_functional_template__$2 = false;
   /* style inject */
