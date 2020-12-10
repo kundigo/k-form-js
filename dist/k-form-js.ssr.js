@@ -936,7 +936,9 @@ var __vue_staticRenderFns__$6 = [];
     undefined,
     undefined,
     undefined
-  );var FormStore = function FormStore(ref) {
+  );function objectWithoutProperties (obj, exclude) { var target = {}; for (var k in obj) if (Object.prototype.hasOwnProperty.call(obj, k) && exclude.indexOf(k) === -1) target[k] = obj[k]; return target; }
+
+var FormStore = function FormStore(ref) {
   var obj, obj$1;
 
   var additionalComponents = ref.additionalComponents; if ( additionalComponents === void 0 ) additionalComponents = {};
@@ -946,6 +948,8 @@ var __vue_staticRenderFns__$6 = [];
   var plugins = ref.plugins; if ( plugins === void 0 ) plugins = [];
   var validationUrl = ref.validationUrl;
   var values = ref.values; if ( values === void 0 ) values = {};
+  var rest = objectWithoutProperties( ref, ["additionalComponents", "authenticityToken", "element", "httpMethod", "plugins", "validationUrl", "values"] );
+  var others = rest;
   Vue.use(Vuex);
 
   var defaultComponents = {
@@ -964,12 +968,12 @@ var __vue_staticRenderFns__$6 = [];
     values: ( obj = {}, obj[modelName] = R.omit(['errors'], values[modelName]), obj ),
     errors: ( obj$1 = {}, obj$1[modelName] = R.pathOr({}, [modelName, "errors"], values), obj$1 ),
     touched: {},
-    meta: {
+    meta: Object.assign({
       modelName: modelName,
       authenticityToken: authenticityToken,
       validationUrl: validationUrl,
       httpMethod: httpMethod,
-    }
+    }, others)
   };
 
   this.store = new Vuex.Store({
