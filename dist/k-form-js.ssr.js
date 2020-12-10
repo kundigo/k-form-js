@@ -944,11 +944,12 @@ var FormStore = function FormStore(ref) {
   var additionalComponents = ref.additionalComponents; if ( additionalComponents === void 0 ) additionalComponents = {};
   var authenticityToken = ref.authenticityToken;
   var element = ref.element;
+  var globalAuthenticityToken = ref.globalAuthenticityToken;
   var httpMethod = ref.httpMethod; if ( httpMethod === void 0 ) httpMethod = 'POST';
   var plugins = ref.plugins; if ( plugins === void 0 ) plugins = [];
   var validationUrl = ref.validationUrl;
   var values = ref.values; if ( values === void 0 ) values = {};
-  var rest = objectWithoutProperties( ref, ["additionalComponents", "authenticityToken", "element", "httpMethod", "plugins", "validationUrl", "values"] );
+  var rest = objectWithoutProperties( ref, ["additionalComponents", "authenticityToken", "element", "globalAuthenticityToken", "httpMethod", "plugins", "validationUrl", "values"] );
   var others = rest;
   Vue.use(Vuex);
 
@@ -971,6 +972,7 @@ var FormStore = function FormStore(ref) {
     meta: Object.assign({
       modelName: modelName,
       authenticityToken: authenticityToken,
+      globalAuthenticityToken: globalAuthenticityToken,
       validationUrl: validationUrl,
       httpMethod: httpMethod,
     }, others)
@@ -1012,12 +1014,9 @@ var FormStore = function FormStore(ref) {
       },
     },
     actions: {
-      refresh: function(context) {
+      sendValuesToServer: function(context) {
         var onSuccess = function (response) {
-          context.commit('setError', {
-            value: response.data[modelName].errors,
-            name: modelName
-          });
+          context.dispatch('dataReceivedFromServer', response.data);
         };
 
         var onError = function (response) {
@@ -1037,9 +1036,17 @@ var FormStore = function FormStore(ref) {
 
         kUtilsJs.Api.sendRequest({url: context.state.meta.validationUrl, data: data, method: context.state.meta.httpMethod, onSuccess: onSuccess, onError: onError, delay: true});
       },
+
+      dataReceivedFromServer: function(context, payload) {
+        context.commit('setError', {
+          value: payload[modelName].errors,
+          name: modelName
+        });
+      },
+
       update: function(context, payload) {
         context.commit('setValue', payload);
-        context.dispatch('refresh');
+        context.dispatch('sendValuesToServer');
       }
     }
 
