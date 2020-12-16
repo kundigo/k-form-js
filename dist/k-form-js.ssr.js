@@ -1,4 +1,4 @@
-'use strict';Object.defineProperty(exports,'__esModule',{value:true});function _interopDefault(e){return(e&&(typeof e==='object')&&'default'in e)?e['default']:e}var kUtilsJs=require('k-utils-js'),moment=_interopDefault(require('moment')),R=require('ramda'),Vue=_interopDefault(require('vue/dist/vue.esm')),Vuex=_interopDefault(require('vuex'));//
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});function _interopDefault(e){return(e&&(typeof e==='object')&&'default'in e)?e['default']:e}var kUtilsJs=require('k-utils-js'),moment=_interopDefault(require('moment')),R=require('ramda'),Vue=_interopDefault(require('vue/dist/vue.esm')),Vuex=_interopDefault(require('vuex')),Monaco=_interopDefault(require('vue-monaco'));//
 var script = {
   inheritAttrs: false,
   props: {
@@ -936,6 +936,172 @@ var __vue_staticRenderFns__$6 = [];
     undefined,
     undefined,
     undefined
+  );//
+
+var script$7 = {
+  inheritAttrs: false,
+  props: {
+    id:{
+      type:String,
+      require:true
+    },
+    name:{
+      type:String,
+      require:true
+    },
+  },
+  components: {
+    Monaco: Monaco,
+  },
+  computed: {
+    displayValidationError: function(){
+      return this.inputTouched && this.inputError
+    },
+    inputClass: function() {
+      return {
+        "form-control": true,
+        "is-invalid": (this.inputTouched && this.inputError),
+        "editor": true
+      }
+    },
+
+    inputError: function() {
+      if (this.inputTouched) {
+        return this.$store.getters.getError(this.$props.name)
+      } else {
+        return null
+      }
+    },
+    inputGroupClass: function() {
+      return {
+        "input-group": true,
+      }
+    },
+    inputTouched: {
+      get: function get () {
+
+        return this.$store.getters.getTouched(this.$props.name)
+      },
+      set: function set (value) {
+        // todo v-on:focus="inputTouched=true" does not work => it seems there isn't a onFocus event on monaco editor
+        // workaround => set touch when input is changed
+        this.$store.commit('setTouched', {
+              value: value,
+              name: this.$props.name
+            }
+        );
+      }
+    },
+    inputValue: {
+      get: function get () {
+
+        return this.$store.getters.getValue(this.$props.name)
+      },
+      set: function set (value) {
+        this.$store.dispatch('update', {
+              value: value,
+              name: this.$props.name
+            }
+        );
+
+        this.inputTouched = true;
+      }
+    },
+    options: function() {
+      return {
+        //see https://microsoft.github.io/monaco-editor/api/modules/monaco.editor.html#editoroptions
+      }
+    }
+  },
+  methods: {
+    onEditorDidMount: function(editor) {
+      // this function is needed in order to display properly the monaco
+      // editor inside a modal.
+      // TODO: add a cucumber test !
+      var count = 5;
+      var countdownInteval = setInterval(function(){
+        editor.layout();
+        count--;
+        if (count === 0) {
+          clearInterval(countdownInteval);
+        }
+      }, 100);
+    }
+  }
+};function createInjectorSSR(context) {
+    if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__;
+    }
+    if (!context)
+        { return function () { }; }
+    if (!('styles' in context)) {
+        context._styles = context._styles || {};
+        Object.defineProperty(context, 'styles', {
+            enumerable: true,
+            get: function () { return context._renderStyles(context._styles); }
+        });
+        context._renderStyles = context._renderStyles || renderStyles;
+    }
+    return function (id, style) { return addStyle(id, style, context); };
+}
+function addStyle(id, css, context) {
+    var group =  css.media || 'default' ;
+    var style = context._styles[group] || (context._styles[group] = { ids: [], css: '' });
+    if (!style.ids.includes(id)) {
+        style.media = css.media;
+        style.ids.push(id);
+        var code = css.source;
+        style.css += code + '\n';
+    }
+}
+function renderStyles(styles) {
+    var css = '';
+    for (var key in styles) {
+        var style = styles[key];
+        css +=
+            '<style data-vue-ssr-id="' +
+                Array.from(style.ids).join(' ') +
+                '"' +
+                (style.media ? ' media="' + style.media + '"' : '') +
+                '>' +
+                style.css +
+                '</style>';
+    }
+    return css;
+}/* script */
+var __vue_script__$7 = script$7;
+
+/* template */
+var __vue_render__$7 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.inputGroupClass},[_vm._ssrNode("<input type=\"hidden\""+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("value",_vm.inputValue))+"> "),_c('Monaco',_vm._b({class:_vm.inputClass,attrs:{"id":_vm.id,"language":"ruby","options":_vm.options},on:{"focus":function($event){_vm.inputTouched=true;},"editorDidMount":_vm.onEditorDidMount},model:{value:(_vm.inputValue),callback:function ($$v) {_vm.inputValue=$$v;},expression:"inputValue"}},'Monaco',this.$attrs,false)),_vm._ssrNode(" "+((_vm.displayValidationError)?("<div"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"invalid-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputError)+"  ")+"</div>"):"<!---->"))],2)};
+var __vue_staticRenderFns__$7 = [];
+
+  /* style */
+  var __vue_inject_styles__$7 = function (inject) {
+    if (!inject) { return }
+    inject("data-v-5c864058_0", { source: ".editor{min-height:300px}", map: undefined, media: undefined });
+
+  };
+  /* scoped */
+  var __vue_scope_id__$7 = undefined;
+  /* module identifier */
+  var __vue_module_identifier__$7 = "data-v-5c864058";
+  /* functional template */
+  var __vue_is_functional_template__$7 = false;
+  /* style inject shadow dom */
+  
+
+  
+  var MonacoEditor = normalizeComponent(
+    { render: __vue_render__$7, staticRenderFns: __vue_staticRenderFns__$7 },
+    __vue_inject_styles__$7,
+    __vue_script__$7,
+    __vue_scope_id__$7,
+    __vue_is_functional_template__$7,
+    __vue_module_identifier__$7,
+    false,
+    undefined,
+    createInjectorSSR,
+    undefined
   );function objectWithoutProperties (obj, exclude) { var target = {}; for (var k in obj) if (Object.prototype.hasOwnProperty.call(obj, k) && exclude.indexOf(k) === -1) target[k] = obj[k]; return target; }
 
 var FormStore = function FormStore(ref) {
@@ -960,7 +1126,8 @@ var FormStore = function FormStore(ref) {
     'k-select': Select,
     'k-date': Date,
     'k-datetime': Datetime,
-    'k-check_box': CheckBox
+    'k-check_box': CheckBox,
+    'k-monaco_editor': MonacoEditor
   };
 
   var modelName = Object.keys(values)[0];
