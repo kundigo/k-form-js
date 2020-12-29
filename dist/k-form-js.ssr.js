@@ -284,6 +284,7 @@ var script$1 = {
                 formatDate: 'd/m/Y',
                 timepicker: false,
                 scrollInput: false,
+                autoClose:true,
                 onChangeDateTime: handleChange
             };
 
@@ -302,7 +303,7 @@ var __vue_staticRenderFns__$1 = [];
   /* scoped */
   var __vue_scope_id__$1 = undefined;
   /* module identifier */
-  var __vue_module_identifier__$1 = "data-v-5f0c4c90";
+  var __vue_module_identifier__$1 = "data-v-ad3c1c9a";
   /* functional template */
   var __vue_is_functional_template__$1 = false;
   /* style inject */
@@ -436,7 +437,8 @@ var script$2 = {
                 formatDate: 'd/m/Y',
                 step: 15,
                 scrollInput: false,
-                onChangeDateTime: handleChange
+                onChangeDateTime: handleChange,
+                autoClose:true
             };
 
             window.$(this.$refs.input).datetimepicker(dateTimeOptions);
@@ -454,7 +456,7 @@ var __vue_staticRenderFns__$2 = [];
   /* scoped */
   var __vue_scope_id__$2 = undefined;
   /* module identifier */
-  var __vue_module_identifier__$2 = "data-v-e9a944dc";
+  var __vue_module_identifier__$2 = "data-v-1c1ea035";
   /* functional template */
   var __vue_is_functional_template__$2 = false;
   /* style inject */
