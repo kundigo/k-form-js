@@ -944,13 +944,18 @@ var script$7 = {
   inheritAttrs: false,
   props: {
     id:{
-      type:String,
-      require:true
+      type: String,
+      require: true
     },
     name:{
-      type:String,
-      require:true
+      type: String,
+      require: true
     },
+    read_only: {
+      type: Boolean,
+      require: false,
+      default: false
+    }
   },
   components: {
     Monaco: Monaco,
@@ -1011,6 +1016,7 @@ var script$7 = {
     },
     options: function() {
       return {
+        readOnly:this.$props.read_only,
         //see https://microsoft.github.io/monaco-editor/api/modules/monaco.editor.html#editoroptions
       }
     }
@@ -1080,13 +1086,13 @@ var __vue_staticRenderFns__$7 = [];
   /* style */
   var __vue_inject_styles__$7 = function (inject) {
     if (!inject) { return }
-    inject("data-v-5c864058_0", { source: ".editor{min-height:300px}", map: undefined, media: undefined });
+    inject("data-v-6c9849c2_0", { source: ".editor{min-height:300px}", map: undefined, media: undefined });
 
   };
   /* scoped */
   var __vue_scope_id__$7 = undefined;
   /* module identifier */
-  var __vue_module_identifier__$7 = "data-v-5c864058";
+  var __vue_module_identifier__$7 = "data-v-6c9849c2";
   /* functional template */
   var __vue_is_functional_template__$7 = false;
   /* style inject shadow dom */
