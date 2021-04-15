@@ -35,7 +35,7 @@
     "raw-loader": "^4.0.0",
     "monaco-editor": "^0.20.0",
     "monaco-editor-webpack-plugin": "^1.9.1",
-    "vue-monaco": "^1.2.1"
+    "vue-monaco": "^1.2.2"
   },
   "devDependencies": {
     "cross-env": "^6.0.3",
