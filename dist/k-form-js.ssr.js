@@ -1090,14 +1090,14 @@ var FormStore = function FormStore(ref) {
   Vue.use(Vuex);
 
   var defaultComponents = {
-    'k-check_box': CheckBox,
+    'k-form': Form,
+    'k-input': Field,
+    'k-textarea': Textarea,
+    'k-select': Select,
     'k-date': Date,
     'k-datetime': Datetime,
-    'k-input': Field,
-    'k-form': Form,
-    'k-select': Select,
-    'k-monaco_editor': MonacoEditor,
-    'k-textarea': Textarea,
+    'k-check_box': CheckBox,
+    'k-monaco_editor': MonacoEditor
   };
 
   var modelName = Object.keys(values)[0];
