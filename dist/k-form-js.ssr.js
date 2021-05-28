@@ -638,6 +638,10 @@ var script$4 = {
   },
   methods:{
     "handleSubmit": function(event) {
+      if (this.$store.getters.getMeta('disableValidation')) {
+        return // early exit
+      }
+
       if (!this.$store.getters.getError(((this.$store.getters.getMeta('modelName')) + "._is_valid"))) {
         event.preventDefault();
         this.$store.commit('setTouched', {
@@ -669,7 +673,7 @@ var __vue_staticRenderFns__$4 = [];
   /* scoped */
   var __vue_scope_id__$4 = undefined;
   /* module identifier */
-  var __vue_module_identifier__$4 = "data-v-7b810e29";
+  var __vue_module_identifier__$4 = "data-v-d4f5b060";
   /* functional template */
   var __vue_is_functional_template__$4 = false;
   /* style inject */
@@ -1130,8 +1134,8 @@ var FormStore = function FormStore(ref) {
   var validationUrl = ref.validationUrl;
   var values = ref.values; if ( values === void 0 ) values = {};
   var initialTouch = ref.initialTouch; if ( initialTouch === void 0 ) initialTouch = false;
-  var disableBackEndValidation = ref.disableBackEndValidation; if ( disableBackEndValidation === void 0 ) disableBackEndValidation = false;
-  var rest = objectWithoutProperties( ref, ["additionalComponents", "authenticityToken", "element", "globalAuthenticityToken", "httpMethod", "plugins", "validationUrl", "values", "initialTouch", "disableBackEndValidation"] );
+  var disableValidation = ref.disableValidation; if ( disableValidation === void 0 ) disableValidation = false;
+  var rest = objectWithoutProperties( ref, ["additionalComponents", "authenticityToken", "element", "globalAuthenticityToken", "httpMethod", "plugins", "validationUrl", "values", "initialTouch", "disableValidation"] );
   var others = rest;
   Vue.use(Vuex);
 
@@ -1161,6 +1165,7 @@ var FormStore = function FormStore(ref) {
       globalAuthenticityToken: globalAuthenticityToken,
       validationUrl: validationUrl,
       httpMethod: httpMethod,
+      disableValidation: disableValidation,
     }, others)
   };
 
@@ -1201,7 +1206,7 @@ var FormStore = function FormStore(ref) {
     },
     actions: {
       sendValuesToServer: function(context) {
-        if (disableBackEndValidation) {
+        if (disableValidation) {
           console.log('Back-end validation is disabled');
           return;
         }
