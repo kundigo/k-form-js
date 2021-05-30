@@ -1074,52 +1074,6 @@ var __vue_staticRenderFns__$7 = [];
     undefined,
     undefined,
     undefined
-  );//
-//
-//
-//
-//
-
-var script$8 = {
-  inheritAttrs: false,
-  props: {
-  },
-  computed: {
-  }
-};/* script */
-var __vue_script__$8 = script$8;
-
-/* template */
-var __vue_render__$8 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('input',_vm._b({},'input',this.$attrs,false),[])};
-var __vue_staticRenderFns__$8 = [];
-
-  /* style */
-  var __vue_inject_styles__$8 = undefined;
-  /* scoped */
-  var __vue_scope_id__$8 = undefined;
-  /* module identifier */
-  var __vue_module_identifier__$8 = "data-v-64948a6c";
-  /* functional template */
-  var __vue_is_functional_template__$8 = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
-  /* style inject shadow dom */
-  
-
-  
-  var Submit = normalizeComponent(
-    { render: __vue_render__$8, staticRenderFns: __vue_staticRenderFns__$8 },
-    __vue_inject_styles__$8,
-    __vue_script__$8,
-    __vue_scope_id__$8,
-    __vue_is_functional_template__$8,
-    __vue_module_identifier__$8,
-    false,
-    undefined,
-    undefined,
-    undefined
   );function objectWithoutProperties (obj, exclude) { var target = {}; for (var k in obj) if (Object.prototype.hasOwnProperty.call(obj, k) && exclude.indexOf(k) === -1) target[k] = obj[k]; return target; }
 
 var FormStore = function FormStore(ref) {
@@ -1140,15 +1094,14 @@ var FormStore = function FormStore(ref) {
   Vue.use(Vuex);
 
   var defaultComponents = {
-    'k-check_box': CheckBox,
+    'k-form': Form,
+    'k-input': Field,
+    'k-textarea': Textarea,
+    'k-select': Select,
     'k-date': Date,
     'k-datetime': Datetime,
-    'k-input': Field,
-    'k-form': Form,
-    'k-select': Select,
-    'k-monaco_editor': MonacoEditor,
-    'k-textarea': Textarea,
-    'k-submit': Submit,
+    'k-check_box': CheckBox,
+    'k-monaco_editor': MonacoEditor
   };
 
   var modelName = Object.keys(values)[0];
