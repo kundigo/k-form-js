@@ -639,23 +639,25 @@ var script$4 = {
   methods:{
     "handleSubmit": function(event) {
       if (this.$store.getters.getMeta('disableValidation')) {
-        return // early exit
+        return // early exit (will continue with the submit)
       }
 
+      this.$store.commit('setTouched', {
+            value: true,
+            name: ((this.$store.getters.getMeta('modelName')) + "._submit")
+          }
+      );
+
       if (!this.$store.getters.getError(((this.$store.getters.getMeta('modelName')) + "._is_valid"))) {
+        // invalid data => du not submit
         event.preventDefault();
-        this.$store.commit('setTouched', {
-                  value: true,
-                  name: ((this.$store.getters.getMeta('modelName')) + "._submit")
-                }
-        );
       }
     },
 
-    "ignoreRailsUjs": function(event) {
-      // make that when using rails ujs with remote:true (aka local:false) we do not send the form if the data is valid
-      // note: the is no tests for this specific case !!
+    "ajaxBeforeSend": function(event) {
       if (!this.$store.getters.getError(((this.$store.getters.getMeta('modelName')) + "._is_valid"))) {
+        // ignore RailsUjs: make that when using rails ujs with remote:true (aka local:false) we do not send the form
+        // if the data is valid note: there is no test for this specific case !!
         event.preventDefault();
       }
     }
@@ -665,7 +667,7 @@ var script$4 = {
 var __vue_script__$4 = script$4;
 
 /* template */
-var __vue_render__$4 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('form',{attrs:{"accept-charset":_vm.$props.acceptCharset,"action":_vm.$props.action,"data-values":_vm.$props.dataValues,"method":_vm.$props.method,"enctype":_vm.$props.enctype},on:{"submit":_vm.handleSubmit,"ajax:beforeSend":_vm.ignoreRailsUjs}},[_vm._t("default")],2)};
+var __vue_render__$4 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('form',{attrs:{"accept-charset":_vm.$props.acceptCharset,"action":_vm.$props.action,"data-values":_vm.$props.dataValues,"method":_vm.$props.method,"enctype":_vm.$props.enctype},on:{"submit":_vm.handleSubmit,"ajax:beforeSend":_vm.ajaxBeforeSend}},[_vm._t("default")],2)};
 var __vue_staticRenderFns__$4 = [];
 
   /* style */
@@ -673,7 +675,7 @@ var __vue_staticRenderFns__$4 = [];
   /* scoped */
   var __vue_scope_id__$4 = undefined;
   /* module identifier */
-  var __vue_module_identifier__$4 = "data-v-d4f5b060";
+  var __vue_module_identifier__$4 = "data-v-5d1c1a9c";
   /* functional template */
   var __vue_is_functional_template__$4 = false;
   /* style inject */
@@ -1079,18 +1081,64 @@ var __vue_staticRenderFns__$7 = [];
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var script$8 = {
   inheritAttrs: false,
   props: {
   },
   computed: {
+    displayValidationWarning: function() {
+      return this.inputTouched && !this.$store.getters.getError(((this.$store.getters.getMeta('modelName')) + "._is_valid"))
+    },
+    inputTouched: {
+      get: function get () {
+        return this.$store.getters.getTouched('modelName')
+      },
+      set: function set (value) {
+        this.$store.commit('setTouched', {
+                    value: value,
+                    name: this.$props.name
+                }
+        );
+      }
+    },
+    recapErrors: function() {
+      var recap = this.$store.getters.getError(this.$store.getters.getMeta("modelName"));
+      delete recap._is_valid;
+      return Object.values(recap);
+    }
+  },
+  data: function data() {
+    return {
+      disabled: false,
+      displayValidationMessages: false,
+    }
+  },
+  methods: {
+    submitting: function submitting() {
+      var this$1 = this;
+
+      if (this.$store.getters.getError(((this.$store.getters.getMeta('modelName')) + "._is_valid"))) {
+        setTimeout( function () { return this$1.disabled = true; });
+      }
+    },
   }
 };/* script */
 var __vue_script__$8 = script$8;
 
 /* template */
-var __vue_render__$8 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('input',_vm._b({},'input',this.$attrs,false),[])};
+var __vue_render__$8 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"form-validation"},[_vm._ssrNode("<input"+(_vm._ssrAttr("disabled",_vm.disabled))+(_vm._ssrAttrs(this.$attrs))+"> "+((_vm.displayValidationWarning)?("<div class=\"form-validation__global-error\">!</div>"):"<!---->")+" "+((_vm.displayValidationWarning & _vm.displayValidationMessages)?("<ul class=\"form-validation__tooltip\">"+(_vm._ssrList((_vm.recapErrors),function(error){return ("<li>"+_vm._ssrEscape(_vm._s(error))+"</li>")}))+"</ul>"):"<!---->"))])};
 var __vue_staticRenderFns__$8 = [];
 
   /* style */
@@ -1098,7 +1146,7 @@ var __vue_staticRenderFns__$8 = [];
   /* scoped */
   var __vue_scope_id__$8 = undefined;
   /* module identifier */
-  var __vue_module_identifier__$8 = "data-v-64948a6c";
+  var __vue_module_identifier__$8 = "data-v-1785a5f6";
   /* functional template */
   var __vue_is_functional_template__$8 = false;
   /* style inject */
@@ -1179,7 +1227,11 @@ var FormStore = function FormStore(ref) {
       }; },
       getError: function (state) { return function (name) {
         var path = kUtilsJs.Utils.dotify(name);
-        return R.path(path.split('.'), state.errors )
+        if (state.meta.disableValidation) {
+          return null
+        } else {
+          return R.path(path.split('.'), state.errors )
+        }
       }; },
       getTouched: function (state) { return function (name) {
         var path = kUtilsJs.Utils.dotify(name);
