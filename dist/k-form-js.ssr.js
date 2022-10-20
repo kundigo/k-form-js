@@ -1,4 +1,4 @@
-'use strict';Object.defineProperty(exports,'__esModule',{value:true});function _interopDefault(e){return(e&&(typeof e==='object')&&'default'in e)?e['default']:e}var vSelect=_interopDefault(require('vue-select')),kUtilsJs=require('k-utils-js'),dateFns=require('date-fns'),flatPickr=_interopDefault(require('vue-flatpickr-component'));require('flatpickr/dist/flatpickr.css');var R=require('ramda'),moment=_interopDefault(require('moment')),dateFnsTz=require('date-fns-tz'),Monaco=_interopDefault(require('vue-monaco')),vue2Editor=require('vue2-editor'),Vue=_interopDefault(require('vue/dist/vue.esm')),Vuex=_interopDefault(require('vuex'));//
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});function _interopDefault(e){return(e&&(typeof e==='object')&&'default'in e)?e['default']:e}var vSelect=_interopDefault(require('vue-select')),kUtilsJs=require('k-utils-js'),dateFns=require('date-fns'),flatPickr=_interopDefault(require('vue-flatpickr-component'));require('flatpickr/dist/flatpickr.css');var R=require('ramda'),moment=_interopDefault(require('moment')),dateFnsTz=require('date-fns-tz'),Monaco=_interopDefault(require('vue-monaco')),vue2Editor=require('vue2-editor'),Vue=_interopDefault(require('vue/dist/vue.esm')),Vuex=_interopDefault(require('vuex')),bootstrap=require('bootstrap');//
 
 var script = {
   inheritAttrs: false,
@@ -2184,6 +2184,107 @@ var __vue_staticRenderFns__$d = [];
     undefined,
     undefined,
     undefined
+  );//
+
+var script$e = {
+  inheritAttrs: false,
+  props: {
+    title: {
+      type: String,
+      require: true
+    },
+    placement: {
+      type: String,
+      require: true,
+      default: 'top'
+    }
+  },
+  mounted: function() {
+    this.$nextTick(function () {
+      new bootstrap.Tooltip(this.$refs.tooltip);
+    });
+  }
+};/* script */
+var __vue_script__$e = script$e;
+
+/* template */
+var __vue_render__$e = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{ref:"tooltip",attrs:{"data-placement":_vm.placement,"title":_vm.title}},[_vm._ssrNode("<i aria-hidden=\"true\" class=\"fa fa-info-circle\"></i>")])};
+var __vue_staticRenderFns__$e = [];
+
+  /* style */
+  var __vue_inject_styles__$e = undefined;
+  /* scoped */
+  var __vue_scope_id__$e = undefined;
+  /* module identifier */
+  var __vue_module_identifier__$e = "data-v-5ca3899e";
+  /* functional template */
+  var __vue_is_functional_template__$e = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+  /* style inject shadow dom */
+  
+
+  
+  var Tooltip = normalizeComponent(
+    { render: __vue_render__$e, staticRenderFns: __vue_staticRenderFns__$e },
+    __vue_inject_styles__$e,
+    __vue_script__$e,
+    __vue_scope_id__$e,
+    __vue_is_functional_template__$e,
+    __vue_module_identifier__$e,
+    false,
+    undefined,
+    undefined,
+    undefined
+  );//
+var script$f = {
+  components: {Tooltip: Tooltip},
+  inheritAttrs: false,
+  props: {
+    for: {
+      type: String,
+      require: true
+    },
+    tooltip_text: {
+      type: String,
+    },
+  },
+};/* script */
+var __vue_script__$f = script$f;
+
+/* template */
+var __vue_render__$f = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('label',{attrs:{"for":_vm.$props['for']}},[_vm._t("default"),_vm._ssrNode(" "),(_vm.tooltip_text)?_c('Tooltip',{attrs:{"title":_vm.tooltip_text}}):_vm._e()],2)};
+var __vue_staticRenderFns__$f = [];
+
+  /* style */
+  var __vue_inject_styles__$f = undefined;
+  /* scoped */
+  var __vue_scope_id__$f = undefined;
+  /* module identifier */
+  var __vue_module_identifier__$f = "data-v-20e023f8";
+  /* functional template */
+  var __vue_is_functional_template__$f = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+  /* style inject shadow dom */
+  
+
+  
+  var Label = normalizeComponent(
+    { render: __vue_render__$f, staticRenderFns: __vue_staticRenderFns__$f },
+    __vue_inject_styles__$f,
+    __vue_script__$f,
+    __vue_scope_id__$f,
+    __vue_is_functional_template__$f,
+    __vue_module_identifier__$f,
+    false,
+    undefined,
+    undefined,
+    undefined
   );// start here the update
 function objectWithoutProperties (obj, exclude) { var target = {}; for (var k in obj) if (Object.prototype.hasOwnProperty.call(obj, k) && exclude.indexOf(k) === -1) target[k] = obj[k]; return target; }
 
@@ -2222,6 +2323,7 @@ var FormStore = function FormStore(ref) {
     'k-quill_editor': QuillEditor,
     'k-textarea': Textarea,
     'k-submit': Submit,
+    'k-label': Label,
   };
 
   var modelName = Object.keys(values)[0];
@@ -2450,7 +2552,7 @@ var FormStore = function FormStore(ref) {
     components: Object.assign(defaultComponents, additionalComponents),
     props: {},
   });
-};/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,Autocomplete: Autocomplete,CheckBox: CheckBox,Date: Date$1,DateOld: DateOld,Datetime: Datetime,DatetimeOld: DatetimeOld,Field: Field,Form: Form,Hidden: Hidden,MonacoEditor: MonacoEditor,QuillEditor: QuillEditor,Select: Select,Submit: Submit,Textarea: Textarea,FormStore: FormStore});// Import vue components
+};/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,Autocomplete: Autocomplete,CheckBox: CheckBox,Date: Date$1,DateOld: DateOld,Datetime: Datetime,DatetimeOld: DatetimeOld,Field: Field,Form: Form,Hidden: Hidden,MonacoEditor: MonacoEditor,QuillEditor: QuillEditor,Select: Select,Submit: Submit,Textarea: Textarea,FormStore: FormStore,Tooltip: Tooltip,Label: Label});// Import vue components
 
 // install function executed by Vue.use()
 function install(Vue) {
@@ -2476,4 +2578,4 @@ if (typeof window !== 'undefined') {
 }
 if (GlobalVue) {
   GlobalVue.use(plugin);
-}exports.Autocomplete=Autocomplete;exports.CheckBox=CheckBox;exports.Date=Date$1;exports.DateOld=DateOld;exports.Datetime=Datetime;exports.DatetimeOld=DatetimeOld;exports.Field=Field;exports.Form=Form;exports.FormStore=FormStore;exports.Hidden=Hidden;exports.MonacoEditor=MonacoEditor;exports.QuillEditor=QuillEditor;exports.Select=Select;exports.Submit=Submit;exports.Textarea=Textarea;exports.default=plugin;
+}exports.Autocomplete=Autocomplete;exports.CheckBox=CheckBox;exports.Date=Date$1;exports.DateOld=DateOld;exports.Datetime=Datetime;exports.DatetimeOld=DatetimeOld;exports.Field=Field;exports.Form=Form;exports.FormStore=FormStore;exports.Hidden=Hidden;exports.Label=Label;exports.MonacoEditor=MonacoEditor;exports.QuillEditor=QuillEditor;exports.Select=Select;exports.Submit=Submit;exports.Textarea=Textarea;exports.Tooltip=Tooltip;exports.default=plugin;
