@@ -2285,6 +2285,126 @@ var __vue_staticRenderFns__$f = [];
     undefined,
     undefined,
     undefined
+  );//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var script$g = {
+  props: {
+    name: {
+      type: String,
+      require: true
+    },
+    id: {
+      type: String,
+      require: true
+    },
+    value: {
+      type: String,
+      require: true
+    },
+    on_value: {
+      type: String,
+      require: true
+    },
+    on_label: {
+      type: String,
+      require: true
+    },
+    off_value: {
+      type: String,
+      require: true
+    },
+    off_label: {
+      type: String,
+      require: true
+    }
+  },
+
+  methods: {
+    toggleInputValue: function () {
+      if (this.inputValue === this.$props.on_value) {
+        this.inputValue = this.$props.off_value;
+      } else {
+        this.inputValue = this.$props.on_value;
+      }
+    }
+  },
+
+  computed: {
+    inputValue: {
+      get: function get() {
+        var value = this.$store.getters.getValue(this.$props.name);
+        if (value === true || value === this.$props.on_value) {
+          return this.$props.on_value
+        } else {
+          return this.$props.off_value
+        }
+      },
+      set: function set(value) {
+        this.$store.dispatch('update', {
+              value: (value === true || value === this.$props.on_value) ? this.$props.on_value : this.$props.off_value,
+              name: this.$props.name
+            }
+        );
+      }
+    },
+
+    inputLabel: {
+      get: function get() {
+        var value = this.$store.getters.getValue(this.$props.name);
+        if (value === true || value === this.$props.on_value) {
+          return this.$props.on_label
+        } else {
+          return this.$props.off_label
+        }
+      }
+    }
+  },
+};/* script */
+var __vue_script__$g = script$g;
+
+/* template */
+var __vue_render__$g = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"d-flex align-items-center",attrs:{"id":_vm.id + '__wrapper'}},[_vm._ssrNode("<label for=\"toggle_button\" class=\"switch_toggle\"><input type=\"hidden\""+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("value",(_vm.inputValue)))+"> <input type=\"checkbox\" id=\"toggle_button\""+(_vm._ssrAttr("checked",_vm.inputValue === _vm.on_value))+" class=\"switch_toggle__input_button\"> <span class=\"switch_toggle__slider-button\"></span></label> <p class=\"mb-0\">"+_vm._ssrEscape(_vm._s(_vm.inputLabel))+"</p>")])};
+var __vue_staticRenderFns__$g = [];
+
+  /* style */
+  var __vue_inject_styles__$g = undefined;
+  /* scoped */
+  var __vue_scope_id__$g = undefined;
+  /* module identifier */
+  var __vue_module_identifier__$g = "data-v-402f0fdc";
+  /* functional template */
+  var __vue_is_functional_template__$g = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+  /* style inject shadow dom */
+  
+
+  
+  var ToggleSwitch = normalizeComponent(
+    { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
+    __vue_inject_styles__$g,
+    __vue_script__$g,
+    __vue_scope_id__$g,
+    __vue_is_functional_template__$g,
+    __vue_module_identifier__$g,
+    false,
+    undefined,
+    undefined,
+    undefined
   );// start here the update
 function objectWithoutProperties (obj, exclude) { var target = {}; for (var k in obj) if (Object.prototype.hasOwnProperty.call(obj, k) && exclude.indexOf(k) === -1) target[k] = obj[k]; return target; }
 
@@ -2324,6 +2444,7 @@ var FormStore = function FormStore(ref) {
     'k-textarea': Textarea,
     'k-submit': Submit,
     'k-label': Label,
+    'k-toggle-switch': ToggleSwitch
   };
 
   var modelName = Object.keys(values)[0];
@@ -2552,7 +2673,7 @@ var FormStore = function FormStore(ref) {
     components: Object.assign(defaultComponents, additionalComponents),
     props: {},
   });
-};/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,Autocomplete: Autocomplete,CheckBox: CheckBox,Date: Date$1,DateOld: DateOld,Datetime: Datetime,DatetimeOld: DatetimeOld,Field: Field,Form: Form,Hidden: Hidden,MonacoEditor: MonacoEditor,QuillEditor: QuillEditor,Select: Select,Submit: Submit,Textarea: Textarea,FormStore: FormStore,Tooltip: Tooltip,Label: Label});// Import vue components
+};/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,Autocomplete: Autocomplete,CheckBox: CheckBox,Date: Date$1,DateOld: DateOld,Datetime: Datetime,DatetimeOld: DatetimeOld,Field: Field,Form: Form,Hidden: Hidden,MonacoEditor: MonacoEditor,QuillEditor: QuillEditor,Select: Select,Submit: Submit,Textarea: Textarea,FormStore: FormStore,Tooltip: Tooltip,Label: Label,ToggleSwitch: ToggleSwitch});// Import vue components
 
 // install function executed by Vue.use()
 function install(Vue) {
@@ -2578,4 +2699,4 @@ if (typeof window !== 'undefined') {
 }
 if (GlobalVue) {
   GlobalVue.use(plugin);
-}exports.Autocomplete=Autocomplete;exports.CheckBox=CheckBox;exports.Date=Date$1;exports.DateOld=DateOld;exports.Datetime=Datetime;exports.DatetimeOld=DatetimeOld;exports.Field=Field;exports.Form=Form;exports.FormStore=FormStore;exports.Hidden=Hidden;exports.Label=Label;exports.MonacoEditor=MonacoEditor;exports.QuillEditor=QuillEditor;exports.Select=Select;exports.Submit=Submit;exports.Textarea=Textarea;exports.Tooltip=Tooltip;exports.default=plugin;
+}exports.Autocomplete=Autocomplete;exports.CheckBox=CheckBox;exports.Date=Date$1;exports.DateOld=DateOld;exports.Datetime=Datetime;exports.DatetimeOld=DatetimeOld;exports.Field=Field;exports.Form=Form;exports.FormStore=FormStore;exports.Hidden=Hidden;exports.Label=Label;exports.MonacoEditor=MonacoEditor;exports.QuillEditor=QuillEditor;exports.Select=Select;exports.Submit=Submit;exports.Textarea=Textarea;exports.ToggleSwitch=ToggleSwitch;exports.Tooltip=Tooltip;exports.default=plugin;
