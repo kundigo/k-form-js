@@ -2298,6 +2298,8 @@ var __vue_staticRenderFns__$f = [];
 //
 //
 //
+//
+//
 
 var script$g = {
   props: {
@@ -2332,6 +2334,7 @@ var script$g = {
   },
 
   methods: {
+
     toggleInputValue: function () {
       if (this.inputValue === this.$props.on_value) {
         this.inputValue = this.$props.off_value;
@@ -2342,6 +2345,12 @@ var script$g = {
   },
 
   computed: {
+    displayValidationError: function(){
+      return this.inputTouched && this.inputError
+    },
+    displayValidationWarning: function(){
+      return this.inputTouched && !this.inputError && this.inputWarning
+    },
     inputValue: {
       get: function get() {
         var value = this.$store.getters.getValue(this.$props.name);
@@ -2359,7 +2368,6 @@ var script$g = {
         );
       }
     },
-
     inputLabel: {
       get: function get() {
         var value = this.$store.getters.getValue(this.$props.name);
@@ -2369,13 +2377,40 @@ var script$g = {
           return this.$props.off_label
         }
       }
-    }
+    },
+    inputError: function() {
+      if (this.inputTouched) {
+        return this.$store.getters.getError(this.$props.name)
+      } else {
+        return null
+      }
+    },
+    inputWarning: function() {
+      if (this.inputTouched) {
+        return this.$store.getters.getWarning(this.$props.name)
+      } else {
+        return null
+      }
+    },
+    inputTouched: {
+      get: function get () {
+
+        return this.$store.getters.getTouched(this.$props.name)
+      },
+      set: function set (value) {
+        this.$store.commit('setTouched', {
+              value: value,
+              name: this.$props.name
+            }
+        );
+      }
+    },
   },
 };/* script */
 var __vue_script__$g = script$g;
 
 /* template */
-var __vue_render__$g = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"d-flex align-items-center",attrs:{"id":_vm.id + '__wrapper'}},[_vm._ssrNode("<label for=\"toggle_button\" class=\"switch_toggle\"><input type=\"hidden\""+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("value",(_vm.inputValue)))+"> <input type=\"checkbox\" id=\"toggle_button\""+(_vm._ssrAttr("checked",_vm.inputValue === _vm.on_value))+" class=\"switch_toggle__input_button\"> <span class=\"switch_toggle__slider-button\"></span></label> <p class=\"mb-0\">"+_vm._ssrEscape(_vm._s(_vm.inputLabel))+"</p>")])};
+var __vue_render__$g = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"d-flex align-items-center",attrs:{"id":_vm.id + '__wrapper'}},[_vm._ssrNode("<label for=\"toggle_button\" class=\"switch_toggle\"><input type=\"hidden\""+(_vm._ssrAttr("id",_vm.id))+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("value",(_vm.inputValue)))+"> <input type=\"checkbox\" id=\"toggle_button\""+(_vm._ssrAttr("checked",_vm.inputValue === _vm.on_value))+" class=\"switch_toggle__input_button\"> <span class=\"switch_toggle__slider-button\"></span></label> <p class=\"mb-0\">"+_vm._ssrEscape(_vm._s(_vm.inputLabel))+"</p> "+((_vm.displayValidationError)?("<span"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"input-block__error-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputError)+"  ")+"</span>"):"<!---->")+" "+((_vm.displayValidationWarning)?("<span"+(_vm._ssrAttr("id",_vm.id + '__warning_message'))+" class=\"input-block__warning-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputWarning)+"  ")+"</span>"):"<!---->"))])};
 var __vue_staticRenderFns__$g = [];
 
   /* style */
@@ -2383,7 +2418,7 @@ var __vue_staticRenderFns__$g = [];
   /* scoped */
   var __vue_scope_id__$g = undefined;
   /* module identifier */
-  var __vue_module_identifier__$g = "data-v-402f0fdc";
+  var __vue_module_identifier__$g = "data-v-383ed17d";
   /* functional template */
   var __vue_is_functional_template__$g = false;
   /* style inject */
