@@ -2300,6 +2300,15 @@ var __vue_staticRenderFns__$f = [];
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var script$g = {
   props: {
@@ -2330,11 +2339,14 @@ var script$g = {
     off_label: {
       type: String,
       require: true
-    }
+    },
+    disabled: {
+      type: Boolean,
+      require: false
+    },
   },
 
   methods: {
-
     toggleInputValue: function () {
       if (this.inputValue === this.$props.on_value) {
         this.inputValue = this.$props.off_value;
@@ -2345,11 +2357,17 @@ var script$g = {
   },
 
   computed: {
-    displayValidationError: function(){
+    displayValidationError: function () {
       return this.inputTouched && this.inputError
     },
-    displayValidationWarning: function(){
+    displayValidationWarning: function () {
       return this.inputTouched && !this.inputError && this.inputWarning
+    },
+    inputClass: function () {
+      return {
+        "toggle_switch_component__label": true,
+        "input-block__field--invalid": (this.inputTouched && this.inputError)
+      }
     },
     inputValue: {
       get: function get() {
@@ -2378,14 +2396,14 @@ var script$g = {
         }
       }
     },
-    inputError: function() {
+    inputError: function () {
       if (this.inputTouched) {
         return this.$store.getters.getError(this.$props.name)
       } else {
         return null
       }
     },
-    inputWarning: function() {
+    inputWarning: function () {
       if (this.inputTouched) {
         return this.$store.getters.getWarning(this.$props.name)
       } else {
@@ -2393,11 +2411,11 @@ var script$g = {
       }
     },
     inputTouched: {
-      get: function get () {
+      get: function get() {
 
         return this.$store.getters.getTouched(this.$props.name)
       },
-      set: function set (value) {
+      set: function set(value) {
         this.$store.commit('setTouched', {
               value: value,
               name: this.$props.name
@@ -2410,7 +2428,7 @@ var script$g = {
 var __vue_script__$g = script$g;
 
 /* template */
-var __vue_render__$g = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"d-flex align-items-center",attrs:{"id":_vm.id + '__wrapper'}},[_vm._ssrNode("<label for=\"toggle_button\" class=\"switch_toggle\"><input type=\"hidden\""+(_vm._ssrAttr("id",_vm.id))+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("value",(_vm.inputValue)))+"> <input type=\"checkbox\" id=\"toggle_button\""+(_vm._ssrAttr("checked",_vm.inputValue === _vm.on_value))+" class=\"switch_toggle__input_button\"> <span class=\"switch_toggle__slider-button\"></span></label> <p class=\"mb-0\">"+_vm._ssrEscape(_vm._s(_vm.inputLabel))+"</p> "+((_vm.displayValidationError)?("<span"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"input-block__error-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputError)+"  ")+"</span>"):"<!---->")+" "+((_vm.displayValidationWarning)?("<span"+(_vm._ssrAttr("id",_vm.id + '__warning_message'))+" class=\"input-block__warning-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputWarning)+"  ")+"</span>"):"<!---->"))])};
+var __vue_render__$g = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"toggle_switch_component__global-container",attrs:{"id":_vm.id + '__wrapper'}},[_vm._ssrNode("<label for=\"toggle_button\""+(_vm._ssrClass(null,_vm.inputClass))+"><input id=\"toggle_button\" type=\"checkbox\" name=\"toggle_button\""+(_vm._ssrAttr("disabled",_vm.disabled))+(_vm._ssrAttr("checked",_vm.inputValue === _vm.on_value))+" class=\"toggle_switch_component__input\"> <span hidden=\"hidden\" class=\"toggle_switch_component__display\"></span> <p>"+_vm._ssrEscape(_vm._s(_vm.inputLabel))+"</p></label> "+((_vm.displayValidationError)?("<span"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"input-block__error-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputError)+"  ")+"</span>"):"<!---->")+" "+((_vm.displayValidationWarning)?("<span"+(_vm._ssrAttr("id",_vm.id + '__warning_message'))+" class=\"input-block__warning-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputWarning)+"  ")+"</span>"):"<!---->"))])};
 var __vue_staticRenderFns__$g = [];
 
   /* style */
@@ -2418,7 +2436,7 @@ var __vue_staticRenderFns__$g = [];
   /* scoped */
   var __vue_scope_id__$g = undefined;
   /* module identifier */
-  var __vue_module_identifier__$g = "data-v-383ed17d";
+  var __vue_module_identifier__$g = "data-v-0636a144";
   /* functional template */
   var __vue_is_functional_template__$g = false;
   /* style inject */
