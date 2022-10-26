@@ -2285,6 +2285,194 @@ var __vue_staticRenderFns__$f = [];
     undefined,
     undefined,
     undefined
+  );//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var script$g = {
+  props: {
+    name: {
+      type: String,
+      require: true
+    },
+    id: {
+      type: String,
+      require: true
+    },
+    value: {
+      type: String,
+      require: true
+    },
+    on_value: {
+      type: String,
+      require: true
+    },
+    on_label: {
+      type: String,
+      require: true
+    },
+    off_value: {
+      type: String,
+      require: true
+    },
+    off_label: {
+      type: String,
+      require: true
+    },
+    disabled: {
+      type: Boolean,
+      require: false
+    },
+    suggest_value: {
+      type: String,
+      require: false,
+      default: "false"
+    }
+  },
+
+  methods: {
+    toggleInputValue: function () {
+      if (this.inputValue === this.$props.on_value) {
+        this.inputValue = this.$props.off_value;
+      } else {
+        this.inputValue = this.$props.on_value;
+      }
+    }
+  },
+
+  computed: {
+    displayValidationError: function () {
+      return this.inputTouched && this.inputError
+    },
+    suggestValue: function () {
+      return (this.$props.suggest_value === 'true')
+    },
+    useSuggestedValue: function() {
+      return this.suggestValue && !this.inputTouched
+    },
+    displayValidationWarning: function () {
+      return this.inputTouched && !this.inputError && this.inputWarning
+    },
+    inputClass: function () {
+      return {
+        "toggle_switch_component__label": true,
+        "input-block__field--invalid": (this.inputTouched && this.inputError)
+      }
+    },
+    inputValue: {
+      get: function get() {
+        var value = this.$store.getters.getValue(this.$props.name);
+        if (value === true || value === this.$props.on_value) {
+          return this.$props.on_value
+        } else {
+          return this.$props.off_value
+        }
+      },
+      set: function set(value) {
+        this.$store.dispatch('update', {
+              value: (value === true || value === this.$props.on_value) ? this.$props.on_value : this.$props.off_value,
+              name: this.$props.name
+            }
+        );
+      }
+    },
+    inputLabel: {
+      get: function get() {
+        var value = this.$store.getters.getValue(this.$props.name);
+        if (value === true || value === this.$props.on_value) {
+          return this.$props.on_label
+        } else {
+          return this.$props.off_label
+        }
+      }
+    },
+    inputError: function () {
+      if (this.inputTouched) {
+        return this.$store.getters.getError(this.$props.name)
+      } else {
+        return null
+      }
+    },
+    inputWarning: function () {
+      if (this.inputTouched) {
+        return this.$store.getters.getWarning(this.$props.name)
+      } else {
+        return null
+      }
+    },
+    inputTouched: {
+      get: function get() {
+        return this.$store.getters.getTouched(this.$props.name)
+      },
+      set: function set(value) {
+        this.$store.commit('setTouched', {
+              value: value,
+              name: this.$props.name
+            }
+        );
+      }
+    },
+  },
+  watch: {
+    suggestedValue: function (value, _oldValue) {
+      if (this.useSuggestedValue) {
+        this.inputValue = value;
+      }
+    }
+  }
+};/* script */
+var __vue_script__$g = script$g;
+
+/* template */
+var __vue_render__$g = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"toggle_switch_component__global-container",attrs:{"id":_vm.id + '__wrapper'}},[_vm._ssrNode("<label for=\"toggle_button\""+(_vm._ssrClass(null,_vm.inputClass))+"><input id=\"toggle_button\" type=\"checkbox\" name=\"toggle_button\""+(_vm._ssrAttr("disabled",_vm.disabled))+(_vm._ssrAttr("checked",_vm.inputValue === _vm.on_value))+" class=\"toggle_switch_component__input\"> <span hidden=\"hidden\" class=\"toggle_switch_component__display\"></span> <p>"+_vm._ssrEscape(_vm._s(_vm.inputLabel))+"</p></label> "+((_vm.displayValidationError)?("<span"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"input-block__error-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputError))+"</span>"):"<!---->")+" "+((_vm.displayValidationWarning)?("<span"+(_vm._ssrAttr("id",_vm.id + '__warning_message'))+" class=\"input-block__warning-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputWarning))+"</span>"):"<!---->"))])};
+var __vue_staticRenderFns__$g = [];
+
+  /* style */
+  var __vue_inject_styles__$g = undefined;
+  /* scoped */
+  var __vue_scope_id__$g = undefined;
+  /* module identifier */
+  var __vue_module_identifier__$g = "data-v-446dcd06";
+  /* functional template */
+  var __vue_is_functional_template__$g = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+  /* style inject shadow dom */
+  
+
+  
+  var ToggleSwitch = normalizeComponent(
+    { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
+    __vue_inject_styles__$g,
+    __vue_script__$g,
+    __vue_scope_id__$g,
+    __vue_is_functional_template__$g,
+    __vue_module_identifier__$g,
+    false,
+    undefined,
+    undefined,
+    undefined
   );// start here the update
 function objectWithoutProperties (obj, exclude) { var target = {}; for (var k in obj) if (Object.prototype.hasOwnProperty.call(obj, k) && exclude.indexOf(k) === -1) target[k] = obj[k]; return target; }
 
@@ -2324,6 +2512,7 @@ var FormStore = function FormStore(ref) {
     'k-textarea': Textarea,
     'k-submit': Submit,
     'k-label': Label,
+    'k-toggle-switch': ToggleSwitch
   };
 
   var modelName = Object.keys(values)[0];
@@ -2552,7 +2741,7 @@ var FormStore = function FormStore(ref) {
     components: Object.assign(defaultComponents, additionalComponents),
     props: {},
   });
-};/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,Autocomplete: Autocomplete,CheckBox: CheckBox,Date: Date$1,DateOld: DateOld,Datetime: Datetime,DatetimeOld: DatetimeOld,Field: Field,Form: Form,Hidden: Hidden,MonacoEditor: MonacoEditor,QuillEditor: QuillEditor,Select: Select,Submit: Submit,Textarea: Textarea,FormStore: FormStore,Tooltip: Tooltip,Label: Label});// Import vue components
+};/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,Autocomplete: Autocomplete,CheckBox: CheckBox,Date: Date$1,DateOld: DateOld,Datetime: Datetime,DatetimeOld: DatetimeOld,Field: Field,Form: Form,Hidden: Hidden,MonacoEditor: MonacoEditor,QuillEditor: QuillEditor,Select: Select,Submit: Submit,Textarea: Textarea,FormStore: FormStore,Tooltip: Tooltip,Label: Label,ToggleSwitch: ToggleSwitch});// Import vue components
 
 // install function executed by Vue.use()
 function install(Vue) {
@@ -2578,4 +2767,4 @@ if (typeof window !== 'undefined') {
 }
 if (GlobalVue) {
   GlobalVue.use(plugin);
-}exports.Autocomplete=Autocomplete;exports.CheckBox=CheckBox;exports.Date=Date$1;exports.DateOld=DateOld;exports.Datetime=Datetime;exports.DatetimeOld=DatetimeOld;exports.Field=Field;exports.Form=Form;exports.FormStore=FormStore;exports.Hidden=Hidden;exports.Label=Label;exports.MonacoEditor=MonacoEditor;exports.QuillEditor=QuillEditor;exports.Select=Select;exports.Submit=Submit;exports.Textarea=Textarea;exports.Tooltip=Tooltip;exports.default=plugin;
+}exports.Autocomplete=Autocomplete;exports.CheckBox=CheckBox;exports.Date=Date$1;exports.DateOld=DateOld;exports.Datetime=Datetime;exports.DatetimeOld=DatetimeOld;exports.Field=Field;exports.Form=Form;exports.FormStore=FormStore;exports.Hidden=Hidden;exports.Label=Label;exports.MonacoEditor=MonacoEditor;exports.QuillEditor=QuillEditor;exports.Select=Select;exports.Submit=Submit;exports.Textarea=Textarea;exports.ToggleSwitch=ToggleSwitch;exports.Tooltip=Tooltip;exports.default=plugin;
