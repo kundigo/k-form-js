@@ -2306,9 +2306,6 @@ var __vue_staticRenderFns__$f = [];
 //
 //
 //
-//
-//
-//
 
 var script$g = {
   props: {
@@ -2344,6 +2341,11 @@ var script$g = {
       type: Boolean,
       require: false
     },
+    suggest_value: {
+      type: String,
+      require: false,
+      default: "false"
+    }
   },
 
   methods: {
@@ -2359,6 +2361,12 @@ var script$g = {
   computed: {
     displayValidationError: function () {
       return this.inputTouched && this.inputError
+    },
+    suggestValue: function () {
+      return (this.$props.suggest_value === 'true')
+    },
+    useSuggestedValue: function() {
+      return this.suggestValue && !this.inputTouched
     },
     displayValidationWarning: function () {
       return this.inputTouched && !this.inputError && this.inputWarning
@@ -2412,7 +2420,6 @@ var script$g = {
     },
     inputTouched: {
       get: function get() {
-
         return this.$store.getters.getTouched(this.$props.name)
       },
       set: function set(value) {
@@ -2424,11 +2431,18 @@ var script$g = {
       }
     },
   },
+  watch: {
+    suggestedValue: function (value, _oldValue) {
+      if (this.useSuggestedValue) {
+        this.inputValue = value;
+      }
+    }
+  }
 };/* script */
 var __vue_script__$g = script$g;
 
 /* template */
-var __vue_render__$g = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"toggle_switch_component__global-container",attrs:{"id":_vm.id + '__wrapper'}},[_vm._ssrNode("<label for=\"toggle_button\""+(_vm._ssrClass(null,_vm.inputClass))+"><input id=\"toggle_button\" type=\"checkbox\" name=\"toggle_button\""+(_vm._ssrAttr("disabled",_vm.disabled))+(_vm._ssrAttr("checked",_vm.inputValue === _vm.on_value))+" class=\"toggle_switch_component__input\"> <span hidden=\"hidden\" class=\"toggle_switch_component__display\"></span> <p>"+_vm._ssrEscape(_vm._s(_vm.inputLabel))+"</p></label> "+((_vm.displayValidationError)?("<span"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"input-block__error-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputError)+"  ")+"</span>"):"<!---->")+" "+((_vm.displayValidationWarning)?("<span"+(_vm._ssrAttr("id",_vm.id + '__warning_message'))+" class=\"input-block__warning-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputWarning)+"  ")+"</span>"):"<!---->"))])};
+var __vue_render__$g = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"toggle_switch_component__global-container",attrs:{"id":_vm.id + '__wrapper'}},[_vm._ssrNode("<label for=\"toggle_button\""+(_vm._ssrClass(null,_vm.inputClass))+"><input id=\"toggle_button\" type=\"checkbox\" name=\"toggle_button\""+(_vm._ssrAttr("disabled",_vm.disabled))+(_vm._ssrAttr("checked",_vm.inputValue === _vm.on_value))+" class=\"toggle_switch_component__input\"> <span hidden=\"hidden\" class=\"toggle_switch_component__display\"></span> <p>"+_vm._ssrEscape(_vm._s(_vm.inputLabel))+"</p></label> "+((_vm.displayValidationError)?("<span"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"input-block__error-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputError))+"</span>"):"<!---->")+" "+((_vm.displayValidationWarning)?("<span"+(_vm._ssrAttr("id",_vm.id + '__warning_message'))+" class=\"input-block__warning-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputWarning))+"</span>"):"<!---->"))])};
 var __vue_staticRenderFns__$g = [];
 
   /* style */
@@ -2436,7 +2450,7 @@ var __vue_staticRenderFns__$g = [];
   /* scoped */
   var __vue_scope_id__$g = undefined;
   /* module identifier */
-  var __vue_module_identifier__$g = "data-v-0636a144";
+  var __vue_module_identifier__$g = "data-v-61a2b812";
   /* functional template */
   var __vue_is_functional_template__$g = false;
   /* style inject */
