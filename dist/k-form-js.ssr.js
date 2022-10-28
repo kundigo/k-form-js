@@ -1,4 +1,4 @@
-'use strict';Object.defineProperty(exports,'__esModule',{value:true});function _interopDefault(e){return(e&&(typeof e==='object')&&'default'in e)?e['default']:e}var vSelect=_interopDefault(require('vue-select')),kUtilsJs=require('k-utils-js'),dateFns=require('date-fns'),flatPickr=_interopDefault(require('vue-flatpickr-component'));require('flatpickr/dist/flatpickr.css');var R=require('ramda'),moment=_interopDefault(require('moment')),dateFnsTz=require('date-fns-tz'),Monaco=_interopDefault(require('vue-monaco')),vue2Editor=require('vue2-editor'),Vue=_interopDefault(require('vue/dist/vue.esm')),Vuex=_interopDefault(require('vuex')),bootstrap=require('bootstrap');//
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});function _interopDefault(e){return(e&&(typeof e==='object')&&'default'in e)?e['default']:e}var vSelect=_interopDefault(require('vue-select')),kUtilsJs=require('k-utils-js'),dateFns=require('date-fns'),flatPickr=_interopDefault(require('vue-flatpickr-component'));require('flatpickr/dist/flatpickr.css');var R=require('ramda'),moment=_interopDefault(require('moment')),dateFnsTz=require('date-fns-tz'),Monaco=_interopDefault(require('vue-monaco')),vue2Editor=require('vue2-editor'),Vue=_interopDefault(require('vue/dist/vue.esm')),Vuex=_interopDefault(require('vuex')),bootstrap=require('bootstrap');require('intl-tel-input/build/css/intlTelInput.css');var intlTelInput=_interopDefault(require('intl-tel-input'));//
 
 var script = {
   inheritAttrs: false,
@@ -2473,6 +2473,129 @@ var __vue_staticRenderFns__$g = [];
     undefined,
     undefined,
     undefined
+  );//
+var script$h = {
+  inheritAttrs: false,
+  props: {
+    name: {
+      type: String,
+      require: true,
+    },
+    id: {
+      type: String,
+      require: true
+    }
+  },
+  computed: {
+    displayValidationError: function () {
+      return this.inputTouched && this.inputError
+    },
+    displayValidationWarning: function () {
+      return this.inputTouched && !this.inputError && this.inputWarning
+    },
+    inputClass: function () {
+      return {
+        "input-block__field": true,
+        "tel-input__text-input": true,
+        "input-block__field--invalid": (this.inputTouched && this.inputError),
+      }
+    },
+    inputGroupClass: function () {
+      return {
+        "input-block": true,
+      }
+    },
+    inputError: function () {
+      if (this.inputTouched) {
+        return this.$store.getters.getError(this.$props.name);
+      } else {
+        return null;
+      }
+    },
+    inputWarning: function () {
+      if (this.inputTouched) {
+        return this.$store.getters.getWarning(this.$props.name)
+      } else {
+        return null
+      }
+    },
+    inputTouched: {
+      get: function get() {
+        return this.$store.getters.getTouched(this.$props.name)
+      },
+      set: function set(value) {
+        this.$store.commit('setTouched', {
+              value: value,
+              name: this.$props.name
+            }
+        );
+      }
+    },
+    inputValue: {
+      get: function get() {
+        return this.$store.getters.getValue(this.$props.name)
+      },
+      set: function set(value) {
+        var iti = window.intlTelInputGlobals.getInstance(this.$refs.telInput);
+        value = iti.getNumber();
+        this.$store.dispatch('update', {
+              value: value,
+              name: this.$props.name
+            }
+        );
+      }
+    }
+  },
+  mounted: function () {
+    this.$nextTick(function () {
+      // go to the library folder and use the utils file from the library
+      // to display the phone number format placeholder
+      var intlTelInputUtils = require("intl-tel-input/build/js/utils");
+      intlTelInput(this.$refs.telInput, {
+        preferredCountries: [],
+        formatOnDisplay: true,
+        separateDialCode: true,
+        utilsScript: intlTelInputUtils
+      });
+      var nodeElement = document.querySelector("div.iti");
+      console.log(nodeElement);
+      // nodeElement[0].outerHTML = nodeElement[0].innerHTML
+    });
+  },
+};/* script */
+var __vue_script__$h = script$h;
+
+/* template */
+var __vue_render__$h = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.inputGroupClass,attrs:{"id":_vm.id + '__wrapper'}},[_vm._ssrNode("<input type=\"tel\""+(_vm._ssrAttr("id",_vm.id))+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("value",(_vm.inputValue)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+"> "+((_vm.displayValidationError)?("<span"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"tel-input__error-feedback\">"+_vm._ssrEscape(_vm._s(_vm.inputError))+"</span>"):"<!---->")+" "+((_vm.displayValidationWarning)?("<span"+(_vm._ssrAttr("id",_vm.id + '__warning_message'))+" class=\"input-block__warning-feedback\">"+_vm._ssrEscape(_vm._s(_vm.inputWarning))+"</span>"):"<!---->"))])};
+var __vue_staticRenderFns__$h = [];
+
+  /* style */
+  var __vue_inject_styles__$h = undefined;
+  /* scoped */
+  var __vue_scope_id__$h = undefined;
+  /* module identifier */
+  var __vue_module_identifier__$h = "data-v-77ccb2a7";
+  /* functional template */
+  var __vue_is_functional_template__$h = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+  /* style inject shadow dom */
+  
+
+  
+  var TelInput = normalizeComponent(
+    { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
+    __vue_inject_styles__$h,
+    __vue_script__$h,
+    __vue_scope_id__$h,
+    __vue_is_functional_template__$h,
+    __vue_module_identifier__$h,
+    false,
+    undefined,
+    undefined,
+    undefined
   );// start here the update
 function objectWithoutProperties (obj, exclude) { var target = {}; for (var k in obj) if (Object.prototype.hasOwnProperty.call(obj, k) && exclude.indexOf(k) === -1) target[k] = obj[k]; return target; }
 
@@ -2512,7 +2635,8 @@ var FormStore = function FormStore(ref) {
     'k-textarea': Textarea,
     'k-submit': Submit,
     'k-label': Label,
-    'k-toggle-switch': ToggleSwitch
+    'k-toggle-switch': ToggleSwitch,
+    'k-tel-input': TelInput,
   };
 
   var modelName = Object.keys(values)[0];
@@ -2741,7 +2865,7 @@ var FormStore = function FormStore(ref) {
     components: Object.assign(defaultComponents, additionalComponents),
     props: {},
   });
-};/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,Autocomplete: Autocomplete,CheckBox: CheckBox,Date: Date$1,DateOld: DateOld,Datetime: Datetime,DatetimeOld: DatetimeOld,Field: Field,Form: Form,Hidden: Hidden,MonacoEditor: MonacoEditor,QuillEditor: QuillEditor,Select: Select,Submit: Submit,Textarea: Textarea,FormStore: FormStore,Tooltip: Tooltip,Label: Label,ToggleSwitch: ToggleSwitch});// Import vue components
+};/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,Autocomplete: Autocomplete,CheckBox: CheckBox,Date: Date$1,DateOld: DateOld,Datetime: Datetime,DatetimeOld: DatetimeOld,Field: Field,Form: Form,Hidden: Hidden,MonacoEditor: MonacoEditor,QuillEditor: QuillEditor,Select: Select,Submit: Submit,Textarea: Textarea,FormStore: FormStore,Tooltip: Tooltip,Label: Label,ToggleSwitch: ToggleSwitch,TelInput: TelInput});// Import vue components
 
 // install function executed by Vue.use()
 function install(Vue) {
@@ -2767,4 +2891,4 @@ if (typeof window !== 'undefined') {
 }
 if (GlobalVue) {
   GlobalVue.use(plugin);
-}exports.Autocomplete=Autocomplete;exports.CheckBox=CheckBox;exports.Date=Date$1;exports.DateOld=DateOld;exports.Datetime=Datetime;exports.DatetimeOld=DatetimeOld;exports.Field=Field;exports.Form=Form;exports.FormStore=FormStore;exports.Hidden=Hidden;exports.Label=Label;exports.MonacoEditor=MonacoEditor;exports.QuillEditor=QuillEditor;exports.Select=Select;exports.Submit=Submit;exports.Textarea=Textarea;exports.ToggleSwitch=ToggleSwitch;exports.Tooltip=Tooltip;exports.default=plugin;
+}exports.Autocomplete=Autocomplete;exports.CheckBox=CheckBox;exports.Date=Date$1;exports.DateOld=DateOld;exports.Datetime=Datetime;exports.DatetimeOld=DatetimeOld;exports.Field=Field;exports.Form=Form;exports.FormStore=FormStore;exports.Hidden=Hidden;exports.Label=Label;exports.MonacoEditor=MonacoEditor;exports.QuillEditor=QuillEditor;exports.Select=Select;exports.Submit=Submit;exports.TelInput=TelInput;exports.Textarea=Textarea;exports.ToggleSwitch=ToggleSwitch;exports.Tooltip=Tooltip;exports.default=plugin;
