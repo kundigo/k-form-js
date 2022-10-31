@@ -2563,9 +2563,8 @@ var script$h = {
         separateDialCode: true,
         utilsScript: intlTelInputUtils
       });
-      var nodeElement = document.querySelector("div.iti");
-      console.log(nodeElement);
-      // nodeElement[0].outerHTML = nodeElement[0].innerHTML
+      var iti = window.intlTelInputGlobals.getInstance(this.$refs.telInput);
+      this.$refs.telInput.value = iti.getNumber();
     });
   },
 };/* script */
@@ -2580,7 +2579,7 @@ var __vue_staticRenderFns__$h = [];
   /* scoped */
   var __vue_scope_id__$h = undefined;
   /* module identifier */
-  var __vue_module_identifier__$h = "data-v-77ccb2a7";
+  var __vue_module_identifier__$h = "data-v-11885851";
   /* functional template */
   var __vue_is_functional_template__$h = false;
   /* style inject */
