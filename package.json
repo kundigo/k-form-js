@@ -33,6 +33,7 @@
     "jquery": "^3.6.0",
     "jquery-datetimepicker": "2.5.21",
     "k-utils-js": "git+https://github.com/kundigo/k-utils-js.git#master",
+    "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "monaco-editor": "^0.20.0",
     "monaco-editor-webpack-plugin": "^1.9.1",
