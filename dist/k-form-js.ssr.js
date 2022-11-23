@@ -1,4 +1,4 @@
-'use strict';Object.defineProperty(exports,'__esModule',{value:true});function _interopDefault(e){return(e&&(typeof e==='object')&&'default'in e)?e['default']:e}var vSelect=_interopDefault(require('vue-select')),kUtilsJs=require('k-utils-js'),dateFns=require('date-fns'),flatPickr=_interopDefault(require('vue-flatpickr-component'));require('flatpickr/dist/flatpickr.css');var R=require('ramda'),moment=_interopDefault(require('moment')),dateFnsTz=require('date-fns-tz'),Monaco=_interopDefault(require('vue-monaco')),vue2Editor=require('vue2-editor'),Vue=_interopDefault(require('vue/dist/vue.esm')),Vuex=_interopDefault(require('vuex')),bootstrap=require('bootstrap');require('intl-tel-input/build/css/intlTelInput.css');var intlTelInput=_interopDefault(require('intl-tel-input'));//
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});function _interopDefault(e){return(e&&(typeof e==='object')&&'default'in e)?e['default']:e}var vSelect=_interopDefault(require('vue-select')),kUtilsJs=require('k-utils-js'),lodash=require('lodash'),dateFns=require('date-fns'),flatPickr=_interopDefault(require('vue-flatpickr-component'));require('flatpickr/dist/flatpickr.css');var R=require('ramda'),moment=_interopDefault(require('moment')),dateFnsTz=require('date-fns-tz'),Monaco=_interopDefault(require('vue-monaco')),vue2Editor=require('vue2-editor'),Vue=_interopDefault(require('vue/dist/vue.esm')),Vuex=_interopDefault(require('vuex')),bootstrap=require('bootstrap');require('intl-tel-input/build/css/intlTelInput.css');var intlTelInput=_interopDefault(require('intl-tel-input'));//
 
 var script = {
   inheritAttrs: false,
@@ -369,12 +369,13 @@ var __vue_staticRenderFns__$1 = [];
   );//
 
 var script$2 = {
-  data: function data() {
+ data: function data () {
     return {
       config: {
-        dateFormat: "d/m/Y",
-        allowInput: true
+        dateFormat: this.pickerFormat(),
+        allowInput: true,
       },
+      debouncedSetFormattedValue: lodash.debounce(this.setFormattedValue, 500),
     };
   },
   components: {
@@ -401,6 +402,11 @@ var script$2 = {
       require: false,
       default: "false",
     },
+    display_format: {
+      type: String,
+      require: false,
+      default: "dd/MM/yyyy",
+    },
   },
   computed: {
     displayValidationError: function () {
@@ -422,7 +428,7 @@ var script$2 = {
       return {
         "input-block__field": true,
         "input-block__field--invalid": this.displayValidationError,
-        "datepicker": true
+        datepicker: true,
       };
     },
     inputError: function () {
@@ -445,10 +451,10 @@ var script$2 = {
       };
     },
     inputTouched: {
-      get: function get() {
+      get: function get () {
         return this.$store.getters.getTouched(this.$props.name);
       },
-      set: function set(value) {
+      set: function set (value) {
         this.$store.commit("setTouched", {
           value: value,
           name: this.$props.name,
@@ -456,10 +462,10 @@ var script$2 = {
       },
     },
     inputValue: {
-      get: function get() {
+      get: function get () {
         return this.$store.getters.getValue(this.$props.name);
       },
-      set: function set(value) {
+      set: function set (value) {
         this.$store.dispatch("update", {
           value: value,
           name: this.$props.name,
@@ -467,32 +473,20 @@ var script$2 = {
       },
     },
     inputFormattedValue: {
-      get: function get() {
+      get: function get () {
         var value = this.$store.getters.getValue(this.$props.name);
         var date = value == null ? "" : new Date(value);
 
         if (dateFns.isValid(date)) {
-          return dateFns.format(date, "dd/MM/yyyy");
+          return dateFns.format(date, this.$props.display_format);
         } else {
           return "";
         }
       },
-      set: function set(value) {
-        if (
-          !R.isNil(value) &&
-          !R.isEmpty(value) &&
-          !value.match(/^[0-9]{2}[/][0-9]{2}[/][0-9]{4}$/)
-        ) {
-          // user is typing a new date, wait for him to finish
-          // TODO: use a more restrictive regexp
-          return;
-        }
-        var date = dateFns.parse(value, 'dd/MM/yyyy', new Date());
-
-        this.$store.dispatch("update", {
-          value: dateFns.isValid(date) ? dateFns.format(date, "yyyy-MM-dd") : "",
-          name: this.$props.name,
-        });
+      set: function set (value) {
+        // user is probably typing a new date, wait for him to finish
+        // and avoid unnecessary updates of the state
+        this.debouncedSetFormattedValue(value);
       },
     },
   },
@@ -504,10 +498,43 @@ var script$2 = {
     },
   },
   methods: {
-    onFocusDatePicker: function() {
+    onFocusDatePicker: function () {
       this.inputTouched = true;
+    },
+    checkIsValidFormat: function (value, display_format) {
+      console.log("isMatch", value, display_format, dateFns.isMatch(value, display_format));
+      return !R.isNil(value) && !R.isEmpty(value) && dateFns.isMatch(value, display_format)
+    },
+    pickerFormat: function () {
+      var format;
+
+      if (this.$props.display_format === 'dd MMM yy') {
+        format = 'j M y';
+      } else if (this.$props.display_format === 'dd/MM/yyyy') {
+        format = 'd/m/Y';
+      } else {
+        format = 'd/m/Y';
+      }
+
+      return format
+    },
+    setFormattedValue: function (value) {
+      var display_format =  this.$props.display_format;
+
+      if (!R.isNil(value) && !R.isEmpty(value) && !dateFns.isMatch(value, display_format)) {
+        // ignore non-blank & unmatched values
+        // user is probably typing a new date, wait for him to finish
+        return
+      }
+
+      var date = dateFns.isMatch(value, display_format) ? dateFns.parse(value, display_format, new Date()) : null;
+
+      this.$store.dispatch("update", {
+        value: dateFns.isValid(date) ? dateFns.format(date, "yyyy-MM-dd") : "",
+        name: this.$props.name,
+      });
     }
-  }
+  },
 };/* script */
 var __vue_script__$2 = script$2;
 
@@ -515,7 +542,7 @@ var __vue_script__$2 = script$2;
 var __vue_render__$2 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.inputGroupClass,attrs:{"id":_vm.id + '__wrapper'}},[_vm._ssrNode(((_vm.prepend)?("<div"+(_vm._ssrAttr("id",_vm.id + '__prepend'))+" class=\"input-block__prepend\"><span>"+(_vm._s(_vm.prepend))+"</span></div>"):"<!---->")+" <input type=\"hidden\""+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("value",_vm.inputValue))+"> "),_c('flat-pickr',_vm._b({ref:"input",class:[
       _vm.inputClass,
       _vm.prepend ? 'input--has-prepend' : '',
-      _vm.append ? 'input--has-append' : '' ],attrs:{"id":_vm.id,"config":_vm.config},on:{"on-open":_vm.onFocusDatePicker},model:{value:(_vm.inputFormattedValue),callback:function ($$v) {_vm.inputFormattedValue=$$v;},expression:"inputFormattedValue"}},'flat-pickr',this.$attrs,false)),_vm._ssrNode(" "+((_vm.append)?("<div"+(_vm._ssrAttr("id",_vm.id + '__append'))+" class=\"input-block__append\"><span>"+(_vm._s(_vm.append))+"</span></div>"):"<!---->")+" "+((_vm.displayValidationError)?("<span"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"input-block__error-feedback\">"+_vm._ssrEscape("\n    "+_vm._s(_vm.inputError)+"\n  ")+"</span>"):"<!---->")+" "+((_vm.displayValidationWarning)?("<span"+(_vm._ssrAttr("id",_vm.id + '__warning_message'))+" class=\"input-block__warning-feedback\">"+_vm._ssrEscape("\n    "+_vm._s(_vm.inputWarning)+"\n  ")+"</span>"):"<!---->"))],2)};
+      _vm.append ? 'input--has-append' : '' ],attrs:{"id":_vm.id,"config":_vm.config},on:{"on-open":_vm.onFocusDatePicker},model:{value:(_vm.inputFormattedValue),callback:function ($$v) {_vm.inputFormattedValue=$$v;},expression:"inputFormattedValue"}},'flat-pickr',this.$attrs,false)),_vm._ssrNode(" "+((_vm.append)?("<div"+(_vm._ssrAttr("id",_vm.id + '__append'))+" class=\"input-block__append\"><span>"+(_vm._s(_vm.append))+"</span></div>"):"<!---->")+" "+((_vm.displayValidationError)?("<span"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"input-block__error-feedback\">"+_vm._ssrEscape(_vm._s(_vm.inputError))+"</span>"):"<!---->")+" "+((_vm.displayValidationWarning)?("<span"+(_vm._ssrAttr("id",_vm.id + '__warning_message'))+" class=\"input-block__warning-feedback\">"+_vm._ssrEscape(_vm._s(_vm.inputWarning))+"</span>"):"<!---->"))],2)};
 var __vue_staticRenderFns__$2 = [];
 
   /* style */
@@ -523,7 +550,7 @@ var __vue_staticRenderFns__$2 = [];
   /* scoped */
   var __vue_scope_id__$2 = undefined;
   /* module identifier */
-  var __vue_module_identifier__$2 = "data-v-594dd644";
+  var __vue_module_identifier__$2 = "data-v-1d8da1e2";
   /* functional template */
   var __vue_is_functional_template__$2 = false;
   /* style inject */
@@ -741,11 +768,12 @@ var script$4 = {
   data: function data() {
     return {
       config: {
-        dateFormat: "d/m/Y H:i",
+        dateFormat: this.pickerFormat(),
         allowInput: true,
         enableTime: true,
         time_24hr: true
       },
+      debouncedSetFormattedValue: lodash.debounce(this.setFormattedValue, 500),
     };
   },
   components: {
@@ -771,7 +799,12 @@ var script$4 = {
       type: String,
       require: false,
       default: "false",
-    }
+    },
+    display_format: {
+      type: String,
+      require: false,
+      default: "dd/MM/yyyy HH:mm",
+    },
   },
   computed: {
     displayValidationError: function () {
@@ -793,7 +826,7 @@ var script$4 = {
       return {
         "input-block__field": true,
         "input-block__field--invalid": this.displayValidationError,
-        "datetimepicker": true
+        datepicker: true,
       };
     },
     inputError: function () {
@@ -842,38 +875,21 @@ var script$4 = {
         var value = this.$store.getters.getValue(this.$props.name);
         var date = value == null ? "" : new Date(value);
 
-        var result;
         if (dateFns.isValid(date)) {
-          result = dateFnsTz.format(
+          return dateFnsTz.format(
               dateFnsTz.utcToZonedTime(date, 'UTC'),
-              "dd/MM/yyyy HH:mm",
+              this.$props.display_format,
               { timeZone: "UTC"}
           );
         } else {
-          result = "";
+          return "";
         }
-        return result
       },
       set: function set (value) {
-        if (
-            !R.isNil(value) &&
-            !R.isEmpty(value)
-            && !value.match(/^[0-9]{2}[/][0-9]{2}[/][0-9]{4} [0-9]{2}:[0-9]{2}$/)
-        ) {
-          // user is typing a new date, wait for him to finish
-          // TODO: use a more restrictive regexp
-          return;
-        }
-        var date = dateFns.parse(value, 'dd/MM/yyyy HH:mm', new Date());
-
-        var normalised_date = dateFns.isValid(date) ? dateFns.formatISO(dateFnsTz.zonedTimeToUtc(date, 'UTC')) : '';
-
-        this.$store.dispatch('update', {
-              value: normalised_date,
-              name: this.$props.name
-            }
-        );
-      }
+        // user is probably typing a new date, wait for him to finish
+        // and avoid unnecessary updates of the state
+        this.debouncedSetFormattedValue(value);
+      },
     },
   },
   watch: {
@@ -884,10 +900,43 @@ var script$4 = {
     },
   },
   methods: {
-    onFocusDatePicker: function() {
+    onFocusDatePicker: function () {
       this.inputTouched = true;
+    },
+    checkIsValidFormat: function (value, display_format) {
+      return !R.isNil(value) && !R.isEmpty(value) && dateFns.isMatch(value, display_format)
+    },
+    pickerFormat: function () {
+      var format;
+
+      if (this.$props.display_format === 'dd MMM yy HH:mm') {
+        format = 'j M y H:i';
+      } else if (this.$props.display_format === 'dd/MM/yyyy HH:mm') {
+        format = 'd/m/Y H:i';
+      } else {
+        format = 'd/m/Y H:i';
+      }
+
+      return format
+    },
+    setFormattedValue:  function (value) {
+      var display_format = this.$props.display_format;
+
+      if (!R.isNil(value) && !R.isEmpty(value) && !dateFns.isMatch(value, display_format)) {
+        // ignore non-blank & unmatched values
+        // user is probably typing a new date, wait for him to finish
+        return
+      }
+
+      var date = dateFns.parse(value, display_format, new Date());
+      var normalised_date = dateFns.isValid(date) ? dateFns.formatISO(dateFnsTz.zonedTimeToUtc(date, 'UTC')) : '';
+
+      this.$store.dispatch("update", {
+        value: normalised_date,
+        name: this.$props.name,
+      });
     }
-  }
+  },
 };/* script */
 var __vue_script__$4 = script$4;
 
@@ -903,7 +952,7 @@ var __vue_staticRenderFns__$4 = [];
   /* scoped */
   var __vue_scope_id__$4 = undefined;
   /* module identifier */
-  var __vue_module_identifier__$4 = "data-v-f2b7e004";
+  var __vue_module_identifier__$4 = "data-v-817000ce";
   /* functional template */
   var __vue_is_functional_template__$4 = false;
   /* style inject */
