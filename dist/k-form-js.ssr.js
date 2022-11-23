@@ -2608,12 +2608,12 @@ var script$h = {
       var intlTelInputUtils = require("intl-tel-input/build/js/utils");
       intlTelInput(this.$refs.telInput, {
         preferredCountries: [],
-        formatOnDisplay: true,
-        separateDialCode: true,
+        formatOnDisplay: false,
+        separateDialCode: false,
         utilsScript: intlTelInputUtils
       });
-      var iti = window.intlTelInputGlobals.getInstance(this.$refs.telInput);
-      this.$refs.telInput.value = iti.getNumber();
+      //let iti = window.intlTelInputGlobals.getInstance(this.$refs.telInput)
+      //this.$refs.telInput.value = iti.getNumber();
     });
   },
 };/* script */
@@ -2628,7 +2628,7 @@ var __vue_staticRenderFns__$h = [];
   /* scoped */
   var __vue_scope_id__$h = undefined;
   /* module identifier */
-  var __vue_module_identifier__$h = "data-v-11885851";
+  var __vue_module_identifier__$h = "data-v-40786b15";
   /* functional template */
   var __vue_is_functional_template__$h = false;
   /* style inject */
