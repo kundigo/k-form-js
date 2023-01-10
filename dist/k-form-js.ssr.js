@@ -1326,6 +1326,7 @@ var __vue_staticRenderFns__$6 = [];
 //
 //
 //
+//
 
 var script$7 = {
 
@@ -1411,7 +1412,7 @@ var script$7 = {
 var __vue_script__$7 = script$7;
 
 /* template */
-var __vue_render__$7 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('form',{attrs:{"accept-charset":_vm.$props.acceptCharset,"action":_vm.$props.action,"data-values":_vm.$props.dataValues,"method":_vm.$props.method,"enctype":_vm.$props.enctype},on:{"submit":_vm.handleSubmit,"ajax:beforeSend":_vm.ajaxBeforeSend}},[_vm._t("default")],2)};
+var __vue_render__$7 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('form',{ref:"form",attrs:{"accept-charset":_vm.$props.acceptCharset,"action":_vm.$props.action,"data-values":_vm.$props.dataValues,"method":_vm.$props.method,"enctype":_vm.$props.enctype},on:{"submit":_vm.handleSubmit,"ajax:beforeSend":_vm.ajaxBeforeSend}},[_vm._t("default")],2)};
 var __vue_staticRenderFns__$7 = [];
 
   /* style */
@@ -1419,7 +1420,7 @@ var __vue_staticRenderFns__$7 = [];
   /* scoped */
   var __vue_scope_id__$7 = undefined;
   /* module identifier */
-  var __vue_module_identifier__$7 = "data-v-1381a7ac";
+  var __vue_module_identifier__$7 = "data-v-0bcd40d6";
   /* functional template */
   var __vue_is_functional_template__$7 = false;
   /* style inject */
