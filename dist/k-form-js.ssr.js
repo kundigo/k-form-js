@@ -1346,9 +1346,34 @@ var script$7 = {
       type: String,
       required: true,
       default: "post"
+    },
+    "autoSubmit": {
+      type: String,
+      default: ''
+    }
+  },
+  data: function() {
+    return { timer: null }
+  },
+  computed: {
+    values: function() {
+      return this.$store.getters.getValue(
+          this.$store.getters.getMeta('modelName')
+      )
     }
   },
   methods:{
+    "debounce": function(timeout){
+      var this$1 = this;
+      if ( timeout === void 0 ) timeout = 500;
+
+      clearTimeout(this.timer);
+      // GOTCHA: DO NOT USE form.submit() because it does not play well with HOTWIRE
+      //  * instead, use form.requestSubmit() that acts as if a submit button were clicked
+      //    and therefor is compatible with HOTWIRE
+      this.timer = setTimeout(function () {  this$1.$refs.form.requestSubmit(); }, timeout);
+    },
+
     "handleSubmit": function(event) {
       if (this.$store.getters.getMeta('disableValidation')) {
         return // early exit (will continue with the submit)
@@ -1373,6 +1398,13 @@ var script$7 = {
         event.preventDefault();
       }
     }
+  },
+  watch: {
+    values: function(value, _oldValue) {
+      if (this.$props.autoSubmit === 'onChange') {
+        this.debounce(750);
+      }
+    }
   }
 
 };/* script */
@@ -1387,7 +1419,7 @@ var __vue_staticRenderFns__$7 = [];
   /* scoped */
   var __vue_scope_id__$7 = undefined;
   /* module identifier */
-  var __vue_module_identifier__$7 = "data-v-b45bdb1c";
+  var __vue_module_identifier__$7 = "data-v-1381a7ac";
   /* functional template */
   var __vue_is_functional_template__$7 = false;
   /* style inject */
