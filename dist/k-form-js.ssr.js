@@ -2420,21 +2420,13 @@ var script$g = {
     },
     inputFormattedValue: {
       get: function get () {
+        //update
         var value = this.$store.getters.getValue(this.$props.name);
-        var time = "";
+        var datetime = value == null ? "" : new Date(value);
 
-        if (value === "" || value === null) {
-          time = "";
-        } else {
-          var hours = value.substring(0, 2);
-          var minutes = value.substring(3, 5);
-
-          time = new Date(null, null, null, hours, minutes);
-        }
-
-        if (dateFns.isValid(time)) {
+        if (dateFns.isValid(datetime)) {
           return dateFnsTz.format(
-              dateFnsTz.utcToZonedTime(time, 'UTC'),
+              dateFnsTz.utcToZonedTime(datetime, 'UTC'),
               this.$props.display_format,
               {timeZone: "UTC"}
           );
@@ -2498,7 +2490,7 @@ var __vue_script__$g = script$g;
 var __vue_render__$g = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.inputGroupClass,attrs:{"id":_vm.id + '__wrapper'}},[_vm._ssrNode(((_vm.prepend)?("<div"+(_vm._ssrAttr("id",_vm.id + '__prepend'))+" class=\"input-block__prepend\"><span>"+(_vm._s(_vm.prepend))+"</span></div>"):"<!---->")+" <input type=\"hidden\""+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("value",_vm.inputValue))+"> "),_c('flat-pickr',_vm._b({ref:"input",class:[
           _vm.inputClass,
           _vm.prepend ? 'input--has-prepend' : '',
-           _vm.append ? 'input--has-append' : '' ],attrs:{"id":_vm.id,"config":_vm.config},on:{"on-open":_vm.onFocusDatePicker},model:{value:(_vm.inputFormattedValue),callback:function ($$v) {_vm.inputFormattedValue=$$v;},expression:"inputFormattedValue"}},'flat-pickr',this.$attrs,false)),_vm._ssrNode(" "+((_vm.append)?("<div"+(_vm._ssrAttr("id",_vm.id + '__append'))+" class=\"input-block__append\"><span>"+(_vm._s(_vm.append))+"</span></div>"):"<!---->")+" "+((_vm.displayValidationError)?("<span"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"input-block__error-feedback\">"+_vm._ssrEscape(_vm._s(_vm.inputError))+"</span>"):"<!---->")+" "+((_vm.displayValidationWarning)?("<span"+(_vm._ssrAttr("id",_vm.id + '__warning_message'))+" class=\"input-block__warning-feedback\">"+_vm._ssrEscape(_vm._s(_vm.inputWarning))+"</span>"):"<!---->"))],2)};
+           _vm.append ? 'input--has-append' : '' ],attrs:{"id":_vm.id,"config":_vm.config},on:{"on-open":_vm.onFocusDatePicker},model:{value:(_vm.inputFormattedValue),callback:function ($$v) {_vm.inputFormattedValue=$$v;},expression:"inputFormattedValue"}},'flat-pickr',this.$attrs,false)),_vm._ssrNode(" "+((_vm.append)?("<div"+(_vm._ssrAttr("id",_vm.id + '__append'))+" class=\"input-block__append\"><span>"+(_vm._s(_vm.append))+"</span></div>"):"<!---->")+" "+((_vm.displayValidationError)?("<span"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"input-block__error-feedback\">"+_vm._ssrEscape("\n    "+_vm._s(_vm.inputError)+"\n  ")+"</span>"):"<!---->")+" "+((_vm.displayValidationWarning)?("<span"+(_vm._ssrAttr("id",_vm.id + '__warning_message'))+" class=\"input-block__warning-feedback\">"+_vm._ssrEscape("\n    "+_vm._s(_vm.inputWarning)+"\n  ")+"</span>"):"<!---->"))],2)};
 var __vue_staticRenderFns__$g = [];
 
   /* style */
@@ -2506,7 +2498,7 @@ var __vue_staticRenderFns__$g = [];
   /* scoped */
   var __vue_scope_id__$g = undefined;
   /* module identifier */
-  var __vue_module_identifier__$g = "data-v-729a0577";
+  var __vue_module_identifier__$g = "data-v-33050435";
   /* functional template */
   var __vue_is_functional_template__$g = false;
   /* style inject */
