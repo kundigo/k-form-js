@@ -226,7 +226,7 @@ var __vue_staticRenderFns__ = [];
   
 
   
-  var Autocomplete = normalizeComponent(
+  var __vue_component__ = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
@@ -355,7 +355,7 @@ var __vue_staticRenderFns__$1 = [];
   
 
   
-  var CheckBox = normalizeComponent(
+  var __vue_component__$1 = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
     __vue_inject_styles__$1,
     __vue_script__$1,
@@ -561,7 +561,7 @@ var __vue_staticRenderFns__$2 = [];
   
 
   
-  var Date$1 = normalizeComponent(
+  var __vue_component__$2 = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
     __vue_inject_styles__$2,
     __vue_script__$2,
@@ -773,7 +773,7 @@ var __vue_staticRenderFns__$3 = [];
   
 
   
-  var Datetime = normalizeComponent(
+  var __vue_component__$3 = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
     __vue_inject_styles__$3,
     __vue_script__$3,
@@ -927,7 +927,7 @@ var __vue_staticRenderFns__$4 = [];
   
 
   
-  var Field = normalizeComponent(
+  var __vue_component__$4 = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
     __vue_inject_styles__$4,
     __vue_script__$4,
@@ -1057,7 +1057,7 @@ var __vue_staticRenderFns__$5 = [];
   
 
   
-  var Form = normalizeComponent(
+  var __vue_component__$5 = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
     __vue_inject_styles__$5,
     __vue_script__$5,
@@ -1131,7 +1131,7 @@ var __vue_staticRenderFns__$6 = [];
   
 
   
-  var Hidden = normalizeComponent(
+  var __vue_component__$6 = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$6, staticRenderFns: __vue_staticRenderFns__$6 },
     __vue_inject_styles__$6,
     __vue_script__$6,
@@ -1297,7 +1297,7 @@ var __vue_staticRenderFns__$7 = [];
   
 
   
-  var MonacoEditor = normalizeComponent(
+  var __vue_component__$7 = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$7, staticRenderFns: __vue_staticRenderFns__$7 },
     __vue_inject_styles__$7,
     __vue_script__$7,
@@ -1438,7 +1438,7 @@ var __vue_staticRenderFns__$8 = [];
   
 
   
-  var QuillEditor = normalizeComponent(
+  var __vue_component__$8 = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$8, staticRenderFns: __vue_staticRenderFns__$8 },
     __vue_inject_styles__$8,
     __vue_script__$8,
@@ -1633,7 +1633,7 @@ var __vue_staticRenderFns__$9 = [];
   
 
   
-  var Select = normalizeComponent(
+  var __vue_component__$9 = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
     __vue_inject_styles__$9,
     __vue_script__$9,
@@ -1727,7 +1727,7 @@ var __vue_staticRenderFns__$a = [];
   
 
   
-  var Submit = normalizeComponent(
+  var __vue_component__$a = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$a, staticRenderFns: __vue_staticRenderFns__$a },
     __vue_inject_styles__$a,
     __vue_script__$a,
@@ -1881,7 +1881,7 @@ var __vue_staticRenderFns__$b = [];
   
 
   
-  var Textarea = normalizeComponent(
+  var __vue_component__$b = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$b, staticRenderFns: __vue_staticRenderFns__$b },
     __vue_inject_styles__$b,
     __vue_script__$b,
@@ -1935,7 +1935,7 @@ var __vue_staticRenderFns__$c = [];
   
 
   
-  var Tooltip = normalizeComponent(
+  var __vue_component__$c = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$c, staticRenderFns: __vue_staticRenderFns__$c },
     __vue_inject_styles__$c,
     __vue_script__$c,
@@ -1948,7 +1948,7 @@ var __vue_staticRenderFns__$c = [];
     undefined
   );//
 var script$d = {
-  components: {Tooltip: Tooltip},
+  components: {Tooltip: __vue_component__$c},
   inheritAttrs: false,
   props: {
     for: {
@@ -1982,7 +1982,7 @@ var __vue_staticRenderFns__$d = [];
   
 
   
-  var Label = normalizeComponent(
+  var __vue_component__$d = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$d, staticRenderFns: __vue_staticRenderFns__$d },
     __vue_inject_styles__$d,
     __vue_script__$d,
@@ -2176,7 +2176,7 @@ var __vue_staticRenderFns__$e = [];
   
 
   
-  var ToggleSwitch = normalizeComponent(
+  var __vue_component__$e = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$e, staticRenderFns: __vue_staticRenderFns__$e },
     __vue_inject_styles__$e,
     __vue_script__$e,
@@ -2298,7 +2298,7 @@ var __vue_staticRenderFns__$f = [];
   
 
   
-  var TelInput = normalizeComponent(
+  var __vue_component__$f = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$f, staticRenderFns: __vue_staticRenderFns__$f },
     __vue_inject_styles__$f,
     __vue_script__$f,
@@ -2509,7 +2509,7 @@ var __vue_staticRenderFns__$g = [];
   
 
   
-  var Time = normalizeComponent(
+  var __vue_component__$g = /*#__PURE__*/normalizeComponent(
     { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
     __vue_inject_styles__$g,
     __vue_script__$g,
@@ -2544,22 +2544,22 @@ var FormStore = function FormStore(ref) {
   window.toto = "TOTO"; // temporary test to bust cache on CI
 
   var defaultComponents = {
-    'k-time': Time,
-    'k-autocomplete': Autocomplete,
-    'k-check_box': CheckBox,
-    'k-date': Date$1,
-    'k-datetime': Datetime,
-    'k-input': Field,
-    'k-form': Form,
-    'k-hidden': Hidden,
-    'k-select': Select,
-    'k-monaco_editor': MonacoEditor,
-    'k-quill_editor': QuillEditor,
-    'k-textarea': Textarea,
-    'k-submit': Submit,
-    'k-label': Label,
-    'k-toggle-switch': ToggleSwitch,
-    'k-tel-input': TelInput,
+    'k-time': __vue_component__$g,
+    'k-autocomplete': __vue_component__,
+    'k-check_box': __vue_component__$1,
+    'k-date': __vue_component__$2,
+    'k-datetime': __vue_component__$3,
+    'k-input': __vue_component__$4,
+    'k-form': __vue_component__$5,
+    'k-hidden': __vue_component__$6,
+    'k-select': __vue_component__$9,
+    'k-monaco_editor': __vue_component__$7,
+    'k-quill_editor': __vue_component__$8,
+    'k-textarea': __vue_component__$b,
+    'k-submit': __vue_component__$a,
+    'k-label': __vue_component__$d,
+    'k-toggle-switch': __vue_component__$e,
+    'k-tel-input': __vue_component__$f,
   };
 
   var modelName = Object.keys(values)[0];
@@ -2788,7 +2788,7 @@ var FormStore = function FormStore(ref) {
     components: Object.assign(defaultComponents, additionalComponents),
     props: {},
   });
-};/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,Autocomplete: Autocomplete,CheckBox: CheckBox,Date: Date$1,Datetime: Datetime,Field: Field,Form: Form,Hidden: Hidden,MonacoEditor: MonacoEditor,QuillEditor: QuillEditor,Select: Select,Submit: Submit,Textarea: Textarea,FormStore: FormStore,Tooltip: Tooltip,Label: Label,ToggleSwitch: ToggleSwitch,TelInput: TelInput,Time: Time});// Import vue components
+};/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,Autocomplete: __vue_component__,CheckBox: __vue_component__$1,Date: __vue_component__$2,Datetime: __vue_component__$3,Field: __vue_component__$4,Form: __vue_component__$5,Hidden: __vue_component__$6,MonacoEditor: __vue_component__$7,QuillEditor: __vue_component__$8,Select: __vue_component__$9,Submit: __vue_component__$a,Textarea: __vue_component__$b,FormStore: FormStore,Tooltip: __vue_component__$c,Label: __vue_component__$d,ToggleSwitch: __vue_component__$e,TelInput: __vue_component__$f,Time: __vue_component__$g});// Import vue components
 
 // install function executed by Vue.use()
 function install(Vue) {
@@ -2814,4 +2814,4 @@ if (typeof window !== 'undefined') {
 }
 if (GlobalVue) {
   GlobalVue.use(plugin);
-}exports.Autocomplete=Autocomplete;exports.CheckBox=CheckBox;exports.Date=Date$1;exports.Datetime=Datetime;exports.Field=Field;exports.Form=Form;exports.FormStore=FormStore;exports.Hidden=Hidden;exports.Label=Label;exports.MonacoEditor=MonacoEditor;exports.QuillEditor=QuillEditor;exports.Select=Select;exports.Submit=Submit;exports.TelInput=TelInput;exports.Textarea=Textarea;exports.Time=Time;exports.ToggleSwitch=ToggleSwitch;exports.Tooltip=Tooltip;exports.default=plugin;
+}exports.Autocomplete=__vue_component__;exports.CheckBox=__vue_component__$1;exports.Date=__vue_component__$2;exports.Datetime=__vue_component__$3;exports.Field=__vue_component__$4;exports.Form=__vue_component__$5;exports.FormStore=FormStore;exports.Hidden=__vue_component__$6;exports.Label=__vue_component__$d;exports.MonacoEditor=__vue_component__$7;exports.QuillEditor=__vue_component__$8;exports.Select=__vue_component__$9;exports.Submit=__vue_component__$a;exports.TelInput=__vue_component__$f;exports.Textarea=__vue_component__$b;exports.Time=__vue_component__$g;exports.ToggleSwitch=__vue_component__$e;exports.Tooltip=__vue_component__$c;exports.default=plugin;
