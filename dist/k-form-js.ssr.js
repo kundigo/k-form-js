@@ -575,7 +575,7 @@ var __vue_staticRenderFns__$2 = [];
   );//
 
 var script$3 = {
-  data: function data() {
+  data: function data () {
     return {
       config: {
         dateFormat: this.pickerFormat(),
@@ -615,6 +615,11 @@ var script$3 = {
       require: false,
       default: "dd/MM/yyyy HH:mm",
     },
+    time_zone: {
+      type: String,
+      require: true,
+
+    }
   },
   computed: {
     displayValidationError: function () {
@@ -659,10 +664,10 @@ var script$3 = {
       };
     },
     inputTouched: {
-      get: function get() {
+      get: function get () {
         return this.$store.getters.getTouched(this.$props.name);
       },
-      set: function set(value) {
+      set: function set (value) {
         this.$store.commit("setTouched", {
           value: value,
           name: this.$props.name,
@@ -670,10 +675,10 @@ var script$3 = {
       },
     },
     inputValue: {
-      get: function get() {
+      get: function get () {
         return this.$store.getters.getValue(this.$props.name);
       },
-      set: function set(value) {
+      set: function set (value) {
         this.$store.dispatch("update", {
           value: value,
           name: this.$props.name,
@@ -683,13 +688,13 @@ var script$3 = {
     inputFormattedValue: {
       get: function get () {
         var value = this.$store.getters.getValue(this.$props.name);
-        var date = value == null ? "" : new Date(value);
+        var tempDate = value == null ? "" : new Date(value) ;
 
-        if (dateFns.isValid(date)) {
+        if (dateFns.isValid(tempDate)) {
+          // it is safe to parse Value using utcToZonedTime
           return dateFnsTz.format(
-              dateFnsTz.utcToZonedTime(date, 'UTC'),
-              this.$props.display_format,
-              { timeZone: "UTC"}
+              dateFnsTz.utcToZonedTime(value, this.$props.time_zone),
+              this.$props.display_format
           );
         } else {
           return "";
@@ -705,16 +710,13 @@ var script$3 = {
   watch: {
     suggestedValue: function (value, _oldValue) {
       if (this.useSuggestedValue) {
-        this.inputValue = value;
+        this.inputValue = value;  // :fixme : make sure this really works with the timezones and the right format
       }
     },
   },
   methods: {
     onFocusDatePicker: function () {
       this.inputTouched = true;
-    },
-    checkIsValidFormat: function (value, display_format) {
-      return !R.isNil(value) && !R.isEmpty(value) && dateFns.isMatch(value, display_format)
     },
     pickerFormat: function () {
       var format;
@@ -729,7 +731,7 @@ var script$3 = {
 
       return format
     },
-    setFormattedValue:  function (value) {
+    setFormattedValue: function (value) {
       var display_format = this.$props.display_format;
 
       if (!R.isNil(value) && !R.isEmpty(value) && !dateFns.isMatch(value, display_format)) {
@@ -738,13 +740,35 @@ var script$3 = {
         return
       }
 
-      var date = dateFns.parse(value, display_format, new Date());
-      var normalised_date = dateFns.isValid(date) ? dateFns.formatISO(dateFnsTz.zonedTimeToUtc(date, 'UTC')) : '';
+      var date = dateFns.parse(value, display_format, this.getCurrentDateInTimezone());
+      var normalised_date = dateFns.isValid(date) ? dateFns.formatISO(dateFnsTz.zonedTimeToUtc(date, this.$props.time_zone)) : '';
 
       this.$store.dispatch("update", {
         value: normalised_date,
         name: this.$props.name,
       });
+    },
+    getCurrentDateInTimezone: function () {
+
+      function zeroPad(num, places) {
+        var zero = places - num.toString().length + 1;
+        return Array(+(zero > 0 && zero)).join("0") + num;
+      }
+
+      // construct the date in UTC (ex: 2014-06-25T10:00:00.000Z)
+      var date = new Date();
+      var year = zeroPad(date.getUTCFullYear(),4);
+      var month = zeroPad(date.getUTCMonth()+1, 2);
+      var day = zeroPad(date.getUTCDate(), 2);
+      var hour = zeroPad(date.getUTCHours(), 2);
+      var minute = zeroPad(date.getUTCMinutes(), 2);
+      var second = zeroPad(date.getUTCSeconds(), 2);
+      var dateString  =year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + second + ".000Z";
+
+      // convert to timezone
+      var result = dateFnsTz.utcToZonedTime(dateString, this.$props.time_zone);
+
+      return  result
     }
   },
 };/* script */
@@ -762,7 +786,7 @@ var __vue_staticRenderFns__$3 = [];
   /* scoped */
   var __vue_scope_id__$3 = undefined;
   /* module identifier */
-  var __vue_module_identifier__$3 = "data-v-817000ce";
+  var __vue_module_identifier__$3 = "data-v-7ecd0102";
   /* functional template */
   var __vue_is_functional_template__$3 = false;
   /* style inject */
