@@ -1,4 +1,4 @@
-'use strict';Object.defineProperty(exports,'__esModule',{value:true});function _interopDefault(e){return(e&&(typeof e==='object')&&'default'in e)?e['default']:e}var vSelect=_interopDefault(require('vue-select')),kUtilsJs=require('k-utils-js'),lodash=require('lodash'),dateFns=require('date-fns'),flatPickr=_interopDefault(require('vue-flatpickr-component'));require('flatpickr/dist/flatpickr.css');var R=require('ramda'),dateFnsTz=require('date-fns-tz'),Monaco=_interopDefault(require('vue-monaco')),vue2Editor=require('vue2-editor'),Vue=_interopDefault(require('vue/dist/vue.esm')),Vuex=_interopDefault(require('vuex')),bootstrap=require('bootstrap');require('intl-tel-input/build/css/intlTelInput.css');var intlTelInput=_interopDefault(require('intl-tel-input'));//
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});function _interopDefault(e){return(e&&(typeof e==='object')&&'default'in e)?e['default']:e}var vSelect=_interopDefault(require('vue-select')),kUtilsJs=require('k-utils-js'),lodash=require('lodash'),dateFns=require('date-fns'),flatPickr=_interopDefault(require('vue-flatpickr-component'));require('flatpickr/dist/flatpickr.css');var R=require('ramda'),dateFnsTz=require('date-fns-tz'),ConfirmDatePlugin=_interopDefault(require('flatpickr/dist/plugins/confirmDate/confirmDate'));require('flatpickr/dist/plugins/confirmDate/confirmDate.css');var Monaco=_interopDefault(require('vue-monaco')),vue2Editor=require('vue2-editor'),Vue=_interopDefault(require('vue/dist/vue.esm')),Vuex=_interopDefault(require('vuex')),bootstrap=require('bootstrap');require('intl-tel-input/build/css/intlTelInput.css');var intlTelInput=_interopDefault(require('intl-tel-input'));//
 
 var script = {
   inheritAttrs: false,
@@ -581,7 +581,8 @@ var script$3 = {
         dateFormat: this.pickerFormat(),
         allowInput: true,
         enableTime: true,
-        time_24hr: true
+        time_24hr: true,
+        "plugins": [new ConfirmDatePlugin({ confirmText: "Done" })]
       },
       debouncedSetFormattedValue: lodash.debounce(this.setFormattedValue, 500),
     };
@@ -688,7 +689,7 @@ var script$3 = {
     inputFormattedValue: {
       get: function get () {
         var value = this.$store.getters.getValue(this.$props.name);
-        var tempDate = value == null ? "" : new Date(value) ;
+        var tempDate = value == null ? "" : new Date(value);
 
         if (dateFns.isValid(tempDate)) {
           // it is safe to parse Value using utcToZonedTime
@@ -750,25 +751,25 @@ var script$3 = {
     },
     getCurrentDateInTimezone: function () {
 
-      function zeroPad(num, places) {
+      function zeroPad (num, places) {
         var zero = places - num.toString().length + 1;
         return Array(+(zero > 0 && zero)).join("0") + num;
       }
 
       // construct the date in UTC (ex: 2014-06-25T10:00:00.000Z)
       var date = new Date();
-      var year = zeroPad(date.getUTCFullYear(),4);
-      var month = zeroPad(date.getUTCMonth()+1, 2);
+      var year = zeroPad(date.getUTCFullYear(), 4);
+      var month = zeroPad(date.getUTCMonth() + 1, 2);
       var day = zeroPad(date.getUTCDate(), 2);
       var hour = zeroPad(date.getUTCHours(), 2);
       var minute = zeroPad(date.getUTCMinutes(), 2);
       var second = zeroPad(date.getUTCSeconds(), 2);
-      var dateString  =year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + second + ".000Z";
+      var dateString = year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + second + ".000Z";
 
       // convert to timezone
       var result = dateFnsTz.utcToZonedTime(dateString, this.$props.time_zone);
 
-      return  result
+      return result
     }
   },
 };/* script */
@@ -786,7 +787,7 @@ var __vue_staticRenderFns__$3 = [];
   /* scoped */
   var __vue_scope_id__$3 = undefined;
   /* module identifier */
-  var __vue_module_identifier__$3 = "data-v-7ecd0102";
+  var __vue_module_identifier__$3 = "data-v-4a2d4606";
   /* functional template */
   var __vue_is_functional_template__$3 = false;
   /* style inject */
