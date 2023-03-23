@@ -475,7 +475,7 @@ var script$2 = {
     inputFormattedValue: {
       get: function get () {
         var value = this.$store.getters.getValue(this.$props.name);
-        var date = value == null ? "" : new Date(value);
+        var date = this.convertStringToDate(value, "yyyy-MM-dd" );
 
         if (dateFns.isValid(date)) {
           return dateFns.format(date, this.$props.display_format);
@@ -518,6 +518,9 @@ var script$2 = {
 
       return format
     },
+    convertStringToDate: function(value, display_format) {
+      return dateFns.isMatch(value, display_format) ? dateFns.parse(value, display_format, new Date()) : null
+    },
     setFormattedValue: function (value) {
       var display_format =  this.$props.display_format;
 
@@ -527,7 +530,7 @@ var script$2 = {
         return
       }
 
-      var date = dateFns.isMatch(value, display_format) ? dateFns.parse(value, display_format, new Date()) : null;
+      var date = this.convertStringToDate(value, display_format);
 
       this.$store.dispatch("update", {
         value: dateFns.isValid(date) ? dateFns.format(date, "yyyy-MM-dd") : "",
@@ -550,7 +553,7 @@ var __vue_staticRenderFns__$2 = [];
   /* scoped */
   var __vue_scope_id__$2 = undefined;
   /* module identifier */
-  var __vue_module_identifier__$2 = "data-v-1d8da1e2";
+  var __vue_module_identifier__$2 = "data-v-6c253526";
   /* functional template */
   var __vue_is_functional_template__$2 = false;
   /* style inject */
