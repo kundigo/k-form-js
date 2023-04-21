@@ -1,4 +1,4 @@
-'use strict';Object.defineProperty(exports,'__esModule',{value:true});function _interopDefault(e){return(e&&(typeof e==='object')&&'default'in e)?e['default']:e}var vSelect=_interopDefault(require('vue-select')),kUtilsJs=require('k-utils-js'),lodash=require('lodash'),dateFns=require('date-fns'),flatPickr=_interopDefault(require('vue-flatpickr-component'));require('flatpickr/dist/flatpickr.css');var R=require('ramda'),dateFnsTz=require('date-fns-tz'),ConfirmDatePlugin=_interopDefault(require('flatpickr/dist/plugins/confirmDate/confirmDate'));require('flatpickr/dist/plugins/confirmDate/confirmDate.css');var Monaco=_interopDefault(require('vue-monaco')),vue2Editor=require('vue2-editor'),Vue=_interopDefault(require('vue/dist/vue.esm')),Vuex=_interopDefault(require('vuex')),bootstrap=require('bootstrap');require('intl-tel-input/build/css/intlTelInput.css');var intlTelInput=_interopDefault(require('intl-tel-input'));//
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});function _interopDefault(e){return(e&&(typeof e==='object')&&'default'in e)?e['default']:e}var vSelect=_interopDefault(require('vue-select')),kUtilsJs=require('k-utils-js'),lodash=require('lodash'),dateFns=require('date-fns'),flatPickr=_interopDefault(require('vue-flatpickr-component'));require('flatpickr/dist/flatpickr.css');var R=require('ramda'),dateFnsTz=require('date-fns-tz'),ConfirmDatePlugin=_interopDefault(require('flatpickr/dist/plugins/confirmDate/confirmDate'));require('flatpickr/dist/plugins/confirmDate/confirmDate.css');var Monaco=_interopDefault(require('vue-monaco')),vue2Editor=require('vue2-editor'),Vue=_interopDefault(require('vue/dist/vue.esm')),Vuex=_interopDefault(require('vuex'));require('intl-tel-input/build/css/intlTelInput.css');var intlTelInput=_interopDefault(require('intl-tel-input'));//
 
 var script = {
   inheritAttrs: false,
@@ -1921,30 +1921,25 @@ var __vue_staticRenderFns__$b = [];
     undefined,
     undefined
   );//
+//
+//
+//
+//
+//
 
 var script$c = {
   inheritAttrs: false,
   props: {
-    title: {
+    for: {
       type: String,
       require: true
-    },
-    placement: {
-      type: String,
-      require: true,
-      default: 'top'
     }
   },
-  mounted: function() {
-    this.$nextTick(function () {
-      new bootstrap.Tooltip(this.$refs.tooltip);
-    });
-  }
 };/* script */
 var __vue_script__$c = script$c;
 
 /* template */
-var __vue_render__$c = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{ref:"tooltip",attrs:{"data-placement":_vm.placement,"title":_vm.title}},[_vm._ssrNode("<i aria-hidden=\"true\" class=\"fa fa-info-circle\"></i>")])};
+var __vue_render__$c = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('label',{attrs:{"for":_vm.$props['for']}},[_vm._t("default")],2)};
 var __vue_staticRenderFns__$c = [];
 
   /* style */
@@ -1952,7 +1947,7 @@ var __vue_staticRenderFns__$c = [];
   /* scoped */
   var __vue_scope_id__$c = undefined;
   /* module identifier */
-  var __vue_module_identifier__$c = "data-v-5ca3899e";
+  var __vue_module_identifier__$c = "data-v-6c319b9b";
   /* functional template */
   var __vue_is_functional_template__$c = false;
   /* style inject */
@@ -1975,82 +1970,35 @@ var __vue_staticRenderFns__$c = [];
     undefined,
     undefined
   );//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 var script$d = {
-  components: {Tooltip: __vue_component__$c},
-  inheritAttrs: false,
-  props: {
-    for: {
-      type: String,
-      require: true
-    },
-    tooltip_text: {
-      type: String,
-    },
-  },
-};/* script */
-var __vue_script__$d = script$d;
-
-/* template */
-var __vue_render__$d = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('label',{attrs:{"for":_vm.$props['for']}},[_vm._t("default"),_vm._ssrNode(" "),(_vm.tooltip_text)?_c('Tooltip',{attrs:{"title":_vm.tooltip_text}}):_vm._e()],2)};
-var __vue_staticRenderFns__$d = [];
-
-  /* style */
-  var __vue_inject_styles__$d = undefined;
-  /* scoped */
-  var __vue_scope_id__$d = undefined;
-  /* module identifier */
-  var __vue_module_identifier__$d = "data-v-20e023f8";
-  /* functional template */
-  var __vue_is_functional_template__$d = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
-  /* style inject shadow dom */
-  
-
-  
-  var __vue_component__$d = /*#__PURE__*/normalizeComponent(
-    { render: __vue_render__$d, staticRenderFns: __vue_staticRenderFns__$d },
-    __vue_inject_styles__$d,
-    __vue_script__$d,
-    __vue_scope_id__$d,
-    __vue_is_functional_template__$d,
-    __vue_module_identifier__$d,
-    false,
-    undefined,
-    undefined,
-    undefined
-  );//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var script$e = {
   props: {
     name: {
       type: String,
@@ -2182,20 +2130,20 @@ var script$e = {
     }
   }
 };/* script */
-var __vue_script__$e = script$e;
+var __vue_script__$d = script$d;
 
 /* template */
-var __vue_render__$e = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"toggle_switch_component__global-container",attrs:{"id":_vm.id + '__wrapper'}},[_vm._ssrNode("<label"+(_vm._ssrAttr("for",_vm.id))+(_vm._ssrClass(null,_vm.inputClass))+"><input type=\"hidden\""+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("value",_vm.off_value))+"> <input"+(_vm._ssrAttr("id",_vm.id))+(_vm._ssrAttr("name",_vm.name))+" type=\"checkbox\""+(_vm._ssrAttr("disabled",_vm.disabled))+(_vm._ssrAttr("checked",_vm.inputValue === _vm.on_value))+(_vm._ssrAttr("value",_vm.on_value))+(_vm._ssrAttrs(this.$attrs))+" class=\"toggle_switch_component__input\"> <span hidden=\"hidden\" class=\"toggle_switch_component__display\"></span> <p>"+_vm._ssrEscape(_vm._s(_vm.inputLabel))+"</p></label> "+((_vm.displayValidationError)?("<span"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"input-block__error-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputError))+"</span>"):"<!---->")+" "+((_vm.displayValidationWarning)?("<span"+(_vm._ssrAttr("id",_vm.id + '__warning_message'))+" class=\"input-block__warning-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputWarning))+"</span>"):"<!---->"))])};
-var __vue_staticRenderFns__$e = [];
+var __vue_render__$d = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"toggle_switch_component__global-container",attrs:{"id":_vm.id + '__wrapper'}},[_vm._ssrNode("<label"+(_vm._ssrAttr("for",_vm.id))+(_vm._ssrClass(null,_vm.inputClass))+"><input type=\"hidden\""+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("value",_vm.off_value))+"> <input"+(_vm._ssrAttr("id",_vm.id))+(_vm._ssrAttr("name",_vm.name))+" type=\"checkbox\""+(_vm._ssrAttr("disabled",_vm.disabled))+(_vm._ssrAttr("checked",_vm.inputValue === _vm.on_value))+(_vm._ssrAttr("value",_vm.on_value))+(_vm._ssrAttrs(this.$attrs))+" class=\"toggle_switch_component__input\"> <span hidden=\"hidden\" class=\"toggle_switch_component__display\"></span> <p>"+_vm._ssrEscape(_vm._s(_vm.inputLabel))+"</p></label> "+((_vm.displayValidationError)?("<span"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"input-block__error-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputError))+"</span>"):"<!---->")+" "+((_vm.displayValidationWarning)?("<span"+(_vm._ssrAttr("id",_vm.id + '__warning_message'))+" class=\"input-block__warning-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputWarning))+"</span>"):"<!---->"))])};
+var __vue_staticRenderFns__$d = [];
 
   /* style */
-  var __vue_inject_styles__$e = undefined;
+  var __vue_inject_styles__$d = undefined;
   /* scoped */
-  var __vue_scope_id__$e = undefined;
+  var __vue_scope_id__$d = undefined;
   /* module identifier */
-  var __vue_module_identifier__$e = "data-v-62f97495";
+  var __vue_module_identifier__$d = "data-v-62f97495";
   /* functional template */
-  var __vue_is_functional_template__$e = false;
+  var __vue_is_functional_template__$d = false;
   /* style inject */
   
   /* style inject SSR */
@@ -2204,19 +2152,19 @@ var __vue_staticRenderFns__$e = [];
   
 
   
-  var __vue_component__$e = /*#__PURE__*/normalizeComponent(
-    { render: __vue_render__$e, staticRenderFns: __vue_staticRenderFns__$e },
-    __vue_inject_styles__$e,
-    __vue_script__$e,
-    __vue_scope_id__$e,
-    __vue_is_functional_template__$e,
-    __vue_module_identifier__$e,
+  var __vue_component__$d = /*#__PURE__*/normalizeComponent(
+    { render: __vue_render__$d, staticRenderFns: __vue_staticRenderFns__$d },
+    __vue_inject_styles__$d,
+    __vue_script__$d,
+    __vue_scope_id__$d,
+    __vue_is_functional_template__$d,
+    __vue_module_identifier__$d,
     false,
     undefined,
     undefined,
     undefined
   );//
-var script$f = {
+var script$e = {
   inheritAttrs: false,
   props: {
     name: {
@@ -2304,20 +2252,20 @@ var script$f = {
     });
   },
 };/* script */
-var __vue_script__$f = script$f;
+var __vue_script__$e = script$e;
 
 /* template */
-var __vue_render__$f = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.inputGroupClass,attrs:{"id":_vm.id + '__wrapper'}},[_vm._ssrNode("<input type=\"tel\""+(_vm._ssrAttr("id",_vm.id))+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("value",(_vm.inputValue)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+"> "+((_vm.displayValidationError)?("<span"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"tel-input__error-feedback\">"+_vm._ssrEscape(_vm._s(_vm.inputError))+"</span>"):"<!---->")+" "+((_vm.displayValidationWarning)?("<span"+(_vm._ssrAttr("id",_vm.id + '__warning_message'))+" class=\"input-block__warning-feedback\">"+_vm._ssrEscape(_vm._s(_vm.inputWarning))+"</span>"):"<!---->"))])};
-var __vue_staticRenderFns__$f = [];
+var __vue_render__$e = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.inputGroupClass,attrs:{"id":_vm.id + '__wrapper'}},[_vm._ssrNode("<input type=\"tel\""+(_vm._ssrAttr("id",_vm.id))+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("value",(_vm.inputValue)))+(_vm._ssrAttrs(this.$attrs))+(_vm._ssrClass(null,_vm.inputClass))+"> "+((_vm.displayValidationError)?("<span"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"tel-input__error-feedback\">"+_vm._ssrEscape(_vm._s(_vm.inputError))+"</span>"):"<!---->")+" "+((_vm.displayValidationWarning)?("<span"+(_vm._ssrAttr("id",_vm.id + '__warning_message'))+" class=\"input-block__warning-feedback\">"+_vm._ssrEscape(_vm._s(_vm.inputWarning))+"</span>"):"<!---->"))])};
+var __vue_staticRenderFns__$e = [];
 
   /* style */
-  var __vue_inject_styles__$f = undefined;
+  var __vue_inject_styles__$e = undefined;
   /* scoped */
-  var __vue_scope_id__$f = undefined;
+  var __vue_scope_id__$e = undefined;
   /* module identifier */
-  var __vue_module_identifier__$f = "data-v-40786b15";
+  var __vue_module_identifier__$e = "data-v-40786b15";
   /* functional template */
-  var __vue_is_functional_template__$f = false;
+  var __vue_is_functional_template__$e = false;
   /* style inject */
   
   /* style inject SSR */
@@ -2326,20 +2274,20 @@ var __vue_staticRenderFns__$f = [];
   
 
   
-  var __vue_component__$f = /*#__PURE__*/normalizeComponent(
-    { render: __vue_render__$f, staticRenderFns: __vue_staticRenderFns__$f },
-    __vue_inject_styles__$f,
-    __vue_script__$f,
-    __vue_scope_id__$f,
-    __vue_is_functional_template__$f,
-    __vue_module_identifier__$f,
+  var __vue_component__$e = /*#__PURE__*/normalizeComponent(
+    { render: __vue_render__$e, staticRenderFns: __vue_staticRenderFns__$e },
+    __vue_inject_styles__$e,
+    __vue_script__$e,
+    __vue_scope_id__$e,
+    __vue_is_functional_template__$e,
+    __vue_module_identifier__$e,
     false,
     undefined,
     undefined,
     undefined
   );//
 
-var script$g = {
+var script$f = {
   data: function data () {
     return {
       config: {
@@ -2512,23 +2460,23 @@ var script$g = {
     }
   },
 };/* script */
-var __vue_script__$g = script$g;
+var __vue_script__$f = script$f;
 
 /* template */
-var __vue_render__$g = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.inputGroupClass,attrs:{"id":_vm.id + '__wrapper'}},[_vm._ssrNode(((_vm.prepend)?("<div"+(_vm._ssrAttr("id",_vm.id + '__prepend'))+" class=\"input-block__prepend\"><span>"+(_vm._s(_vm.prepend))+"</span></div>"):"<!---->")+" <input type=\"hidden\""+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("value",_vm.inputValue))+"> "),_c('flat-pickr',_vm._b({ref:"input",class:[
+var __vue_render__$f = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.inputGroupClass,attrs:{"id":_vm.id + '__wrapper'}},[_vm._ssrNode(((_vm.prepend)?("<div"+(_vm._ssrAttr("id",_vm.id + '__prepend'))+" class=\"input-block__prepend\"><span>"+(_vm._s(_vm.prepend))+"</span></div>"):"<!---->")+" <input type=\"hidden\""+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("value",_vm.inputValue))+"> "),_c('flat-pickr',_vm._b({ref:"input",class:[
           _vm.inputClass,
           _vm.prepend ? 'input--has-prepend' : '',
            _vm.append ? 'input--has-append' : '' ],attrs:{"id":_vm.id,"config":_vm.config},on:{"on-open":_vm.onFocusDatePicker},model:{value:(_vm.inputFormattedValue),callback:function ($$v) {_vm.inputFormattedValue=$$v;},expression:"inputFormattedValue"}},'flat-pickr',this.$attrs,false)),_vm._ssrNode(" "+((_vm.append)?("<div"+(_vm._ssrAttr("id",_vm.id + '__append'))+" class=\"input-block__append\"><span>"+(_vm._s(_vm.append))+"</span></div>"):"<!---->")+" "+((_vm.displayValidationError)?("<span"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"input-block__error-feedback\">"+_vm._ssrEscape("\n    "+_vm._s(_vm.inputError)+"\n  ")+"</span>"):"<!---->")+" "+((_vm.displayValidationWarning)?("<span"+(_vm._ssrAttr("id",_vm.id + '__warning_message'))+" class=\"input-block__warning-feedback\">"+_vm._ssrEscape("\n    "+_vm._s(_vm.inputWarning)+"\n  ")+"</span>"):"<!---->"))],2)};
-var __vue_staticRenderFns__$g = [];
+var __vue_staticRenderFns__$f = [];
 
   /* style */
-  var __vue_inject_styles__$g = undefined;
+  var __vue_inject_styles__$f = undefined;
   /* scoped */
-  var __vue_scope_id__$g = undefined;
+  var __vue_scope_id__$f = undefined;
   /* module identifier */
-  var __vue_module_identifier__$g = "data-v-33050435";
+  var __vue_module_identifier__$f = "data-v-33050435";
   /* functional template */
-  var __vue_is_functional_template__$g = false;
+  var __vue_is_functional_template__$f = false;
   /* style inject */
   
   /* style inject SSR */
@@ -2537,13 +2485,13 @@ var __vue_staticRenderFns__$g = [];
   
 
   
-  var __vue_component__$g = /*#__PURE__*/normalizeComponent(
-    { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
-    __vue_inject_styles__$g,
-    __vue_script__$g,
-    __vue_scope_id__$g,
-    __vue_is_functional_template__$g,
-    __vue_module_identifier__$g,
+  var __vue_component__$f = /*#__PURE__*/normalizeComponent(
+    { render: __vue_render__$f, staticRenderFns: __vue_staticRenderFns__$f },
+    __vue_inject_styles__$f,
+    __vue_script__$f,
+    __vue_scope_id__$f,
+    __vue_is_functional_template__$f,
+    __vue_module_identifier__$f,
     false,
     undefined,
     undefined,
@@ -2572,7 +2520,7 @@ var FormStore = function FormStore(ref) {
   window.toto = "TOTO"; // temporary test to bust cache on CI
 
   var defaultComponents = {
-    'k-time': __vue_component__$g,
+    'k-time': __vue_component__$f,
     'k-autocomplete': __vue_component__,
     'k-check_box': __vue_component__$1,
     'k-date': __vue_component__$2,
@@ -2585,9 +2533,9 @@ var FormStore = function FormStore(ref) {
     'k-quill_editor': __vue_component__$8,
     'k-textarea': __vue_component__$b,
     'k-submit': __vue_component__$a,
-    'k-label': __vue_component__$d,
-    'k-toggle-switch': __vue_component__$e,
-    'k-tel-input': __vue_component__$f,
+    'k-label': __vue_component__$c,
+    'k-toggle-switch': __vue_component__$d,
+    'k-tel-input': __vue_component__$e,
   };
 
   var modelName = Object.keys(values)[0];
@@ -2816,7 +2764,7 @@ var FormStore = function FormStore(ref) {
     components: Object.assign(defaultComponents, additionalComponents),
     props: {},
   });
-};/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,Autocomplete: __vue_component__,CheckBox: __vue_component__$1,Date: __vue_component__$2,Datetime: __vue_component__$3,Field: __vue_component__$4,Form: __vue_component__$5,Hidden: __vue_component__$6,MonacoEditor: __vue_component__$7,QuillEditor: __vue_component__$8,Select: __vue_component__$9,Submit: __vue_component__$a,Textarea: __vue_component__$b,FormStore: FormStore,Tooltip: __vue_component__$c,Label: __vue_component__$d,ToggleSwitch: __vue_component__$e,TelInput: __vue_component__$f,Time: __vue_component__$g});// Import vue components
+};/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,Autocomplete: __vue_component__,CheckBox: __vue_component__$1,Date: __vue_component__$2,Datetime: __vue_component__$3,Field: __vue_component__$4,Form: __vue_component__$5,Hidden: __vue_component__$6,MonacoEditor: __vue_component__$7,QuillEditor: __vue_component__$8,Select: __vue_component__$9,Submit: __vue_component__$a,Textarea: __vue_component__$b,FormStore: FormStore,Label: __vue_component__$c,ToggleSwitch: __vue_component__$d,TelInput: __vue_component__$e,Time: __vue_component__$f});// Import vue components
 
 // install function executed by Vue.use()
 function install(Vue) {
@@ -2842,4 +2790,4 @@ if (typeof window !== 'undefined') {
 }
 if (GlobalVue) {
   GlobalVue.use(plugin);
-}exports.Autocomplete=__vue_component__;exports.CheckBox=__vue_component__$1;exports.Date=__vue_component__$2;exports.Datetime=__vue_component__$3;exports.Field=__vue_component__$4;exports.Form=__vue_component__$5;exports.FormStore=FormStore;exports.Hidden=__vue_component__$6;exports.Label=__vue_component__$d;exports.MonacoEditor=__vue_component__$7;exports.QuillEditor=__vue_component__$8;exports.Select=__vue_component__$9;exports.Submit=__vue_component__$a;exports.TelInput=__vue_component__$f;exports.Textarea=__vue_component__$b;exports.Time=__vue_component__$g;exports.ToggleSwitch=__vue_component__$e;exports.Tooltip=__vue_component__$c;exports.default=plugin;
+}exports.Autocomplete=__vue_component__;exports.CheckBox=__vue_component__$1;exports.Date=__vue_component__$2;exports.Datetime=__vue_component__$3;exports.Field=__vue_component__$4;exports.Form=__vue_component__$5;exports.FormStore=FormStore;exports.Hidden=__vue_component__$6;exports.Label=__vue_component__$c;exports.MonacoEditor=__vue_component__$7;exports.QuillEditor=__vue_component__$8;exports.Select=__vue_component__$9;exports.Submit=__vue_component__$a;exports.TelInput=__vue_component__$e;exports.Textarea=__vue_component__$b;exports.Time=__vue_component__$f;exports.ToggleSwitch=__vue_component__$d;exports.default=plugin;
