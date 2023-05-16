@@ -2192,7 +2192,7 @@ var script$e = {
     },
     inputGroupClass: function () {
       return {
-        "input-block": true,
+        "input-block tel-input-block": true,
       }
     },
     inputError: function () {
@@ -2263,7 +2263,7 @@ var __vue_staticRenderFns__$e = [];
   /* scoped */
   var __vue_scope_id__$e = undefined;
   /* module identifier */
-  var __vue_module_identifier__$e = "data-v-40786b15";
+  var __vue_module_identifier__$e = "data-v-25c5f69d";
   /* functional template */
   var __vue_is_functional_template__$e = false;
   /* style inject */
