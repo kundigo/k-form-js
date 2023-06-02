@@ -81,7 +81,7 @@ Then in the vue we can do something similar to the following lines:
 Updating the package:
 
 * Make the updates to the components
-* When adding new components, update `README.md` and `src/lib-components/index.js`
+* When adding new components, update `README.md` and `src/lib-components/modal.js`
 * Bump the version in `package.json`
 * run the command `npm run build`
 * commit and push changes
