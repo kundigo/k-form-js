@@ -1513,7 +1513,6 @@ var __vue_staticRenderFns__$8 = [];
 //
 //
 //
-//
 
 var script$9 = {
   inheritAttrs: false,
@@ -1643,7 +1642,7 @@ var script$9 = {
 var __vue_script__$9 = script$9;
 
 /* template */
-var __vue_render__$9 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.inputGroupClass,attrs:{"id":_vm.id + '__wrapper'}},[_vm._ssrNode(((_vm.readonly)?("<input type=\"hidden\""+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("value",_vm.inputValue))+">"):"<!---->")+" "+((_vm.prepend)?("<div"+(_vm._ssrAttr("id",_vm.id + '__prepend'))+" class=\"input-block__prepend\"><span>"+(_vm._s(_vm.prepend))+"</span></div>"):"<!---->")+" "),_c('select',_vm._b({directives:[{name:"model",rawName:"v-model",value:(_vm.inputValue),expression:"inputValue"}],class:[_vm.inputClass, _vm.prepend ? 'input--has-prepend' : '', _vm.append ? 'input--has-append' : ''],attrs:{"id":_vm.id,"name":_vm.name,"disabled":_vm.readonly},on:{"focus":function($event){_vm.inputTouched=true;},"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.inputValue=$event.target.multiple ? $$selectedVal : $$selectedVal[0];}}},'select',this.$attrs,false),[(_vm.includeBlank)?_c('option',{attrs:{"value":""}}):_vm._e(),_vm._v(" "),_vm._l((_vm.choicesToJson),function(value,key){return _c('option',{key:key,domProps:{"value":value.id}},[_vm._v("\n      "+_vm._s(value.display_name)+"\n    ")])})],2),_vm._ssrNode(" "+((_vm.append)?("<div"+(_vm._ssrAttr("id",_vm.id + '__append'))+" class=\"input-block__append\"><span>"+(_vm._s(_vm.append))+"</span></div>"):"<!---->")+" "+((_vm.displayValidationError)?("<span"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"input-block__error-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputError)+"  ")+"</span>"):"<!---->")+" "+((_vm.displayValidationWarning)?("<span"+(_vm._ssrAttr("id",_vm.id + '__warning_message'))+" class=\"input-block__warning-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputWarning)+"  ")+"</span>"):"<!---->"))],2)};
+var __vue_render__$9 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.inputGroupClass,attrs:{"id":_vm.id + '__wrapper'}},[_vm._ssrNode(((_vm.readonly)?("<input type=\"hidden\""+(_vm._ssrAttr("name",_vm.name))+(_vm._ssrAttr("value",_vm.inputValue))+">"):"<!---->")+" "+((_vm.prepend)?("<div"+(_vm._ssrAttr("id",_vm.id + '__prepend'))+" class=\"input-block__prepend\"><span>"+(_vm._s(_vm.prepend))+"</span></div>"):"<!---->")+" "),_c('select',_vm._b({directives:[{name:"model",rawName:"v-model",value:(_vm.inputValue),expression:"inputValue"}],class:[_vm.inputClass, _vm.prepend ? 'input--has-prepend' : '', _vm.append ? 'input--has-append' : ''],attrs:{"id":_vm.id,"name":_vm.name},on:{"focus":function($event){_vm.inputTouched=true;},"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.inputValue=$event.target.multiple ? $$selectedVal : $$selectedVal[0];}}},'select',this.$attrs,false),[(_vm.includeBlank)?_c('option',{attrs:{"value":""}}):_vm._e(),_vm._v(" "),_vm._l((_vm.choicesToJson),function(value,key){return _c('option',{key:key,domProps:{"value":value.id}},[_vm._v("\n      "+_vm._s(value.display_name)+"\n    ")])})],2),_vm._ssrNode(" "+((_vm.append)?("<div"+(_vm._ssrAttr("id",_vm.id + '__append'))+" class=\"input-block__append\"><span>"+(_vm._s(_vm.append))+"</span></div>"):"<!---->")+" "+((_vm.displayValidationError)?("<span"+(_vm._ssrAttr("id",_vm.id + '__error_message'))+" class=\"input-block__error-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputError)+"  ")+"</span>"):"<!---->")+" "+((_vm.displayValidationWarning)?("<span"+(_vm._ssrAttr("id",_vm.id + '__warning_message'))+" class=\"input-block__warning-feedback\">"+_vm._ssrEscape(" "+_vm._s(_vm.inputWarning)+"  ")+"</span>"):"<!---->"))],2)};
 var __vue_staticRenderFns__$9 = [];
 
   /* style */
@@ -1651,7 +1650,7 @@ var __vue_staticRenderFns__$9 = [];
   /* scoped */
   var __vue_scope_id__$9 = undefined;
   /* module identifier */
-  var __vue_module_identifier__$9 = "data-v-9a1704b6";
+  var __vue_module_identifier__$9 = "data-v-39410278";
   /* functional template */
   var __vue_is_functional_template__$9 = false;
   /* style inject */
